@@ -1,0 +1,36 @@
+.main-container {
+    background-color: #F0F2F4;
+    width: 100vw;
+    border-radius: 25px;
+    max-width: 85vw;
+    padding: 20px;
+}
+
+
+.categoria-main {
+    background-color: #8CB2ED;
+    height: 40px;
+    margin: auto;
+    width: 17vw;
+    border-radius: 25px;
+}
+
+.categoria-main:hover {
+    background-color: #87a6e9;
+}
+
+.project-container {
+    background-color: #9DBFE7;
+    height: 225px;
+    width: 25vw;
+    border-radius: 25px;
+    margin-top: 20px;
+    margin: 1vw;
+}
+
+.main-container-information {
+    background-color: #C1D0E2;
+    height: 300px;
+    width: 78vw;
+    border-radius: 25px;
+}

@@ -1,0 +1,65 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+header {
+    width: 100%;
+    padding: 10px 0;
+    height: 100px;
+}
+
+.octoNavbar {
+
+    width: 100%;
+    height: 10px;
+    max-width: 100vw;
+    padding: 0;
+}
+
+.row-container {
+    padding-left: 0;
+}
+
+.btn-sencillo, .btn-sencillo2 {
+    background-color: #9DBFE7;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    margin-right: 1vw;
+    margin-left: 0;
+}
+
+.btn-sencillo2 {
+    margin-right: 0;
+    margin-left: 1vw;
+}
+
+.btn-sencillo:hover {
+    background-color: #9DBFE7;
+}
+
+.btn-mid {
+    background-color: #B8E9F8;
+    border-radius: 25px;
+    width: 80px;
+    height: 40px;
+    margin-top: 5px;
+    margin-left: 0.5vw;
+}
+
+.btn-mid:hover {
+    background-color: #B1E2F1;
+}
+
+#input-navi{
+    background-color: #B8E9F8;
+    border: none;
+    height: 45px;
+    border-radius: 25px;
+    margin-top: 2.5px;
+    margin-left: 1.5vw;
+    margin-right: 1vw;
+}
+

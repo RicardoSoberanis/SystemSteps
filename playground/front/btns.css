@@ -1,0 +1,15 @@
+.btn-sencillo {
+    background-color: #9DBFE7;
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+}
+
+.btn-sencillo:hover {
+    background-color: #9DBFE7;
+}
+
+h2 {
+    background-color: aliceblue;
+    text-align: center;
+}

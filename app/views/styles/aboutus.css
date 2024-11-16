@@ -1,0 +1,13 @@
+.aboutus-infomation {
+    background-color: #D4D4F4;
+    width: 50vw;
+    height: 500px;
+    border-radius: 25px;
+}
+
+.img-octo {
+    height: 200px;
+    width: 200px;
+    margin-top: 20vh;
+    margin-left: 7vw;
+}
