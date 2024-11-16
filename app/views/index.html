@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Title</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <link rel="stylesheet" href="/styles/styles.css">
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+    
+        <script src="https://kit.fontawesome.com/272ccf80e4.js" crossorigin="anonymous"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                    <input type="email" id="email" class="form-control" placeholder="Ingresa tu correo" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" id="password" class="form-control" placeholder="Ingresa tu contraseña" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">Recordar</label>
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn btn-custom">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p>¿No tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate aquí</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Modal de Registro -->
+        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registerModalLabel">Registro de Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <input type="text" class="form-control" placeholder="Nombre" required>
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" class="form-control" placeholder="Apellido" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Correo electrónico" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control" placeholder="Contraseña" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control" placeholder="Confirmar contraseña" required>
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn btn-custom">Registrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Modal de Cerrar Sesión -->
+        <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="logoutModalLabel">Confirmar Cierre de Sesión</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que quieres cerrar sesión?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger">Cerrar Sesión</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .center-screen {
+                display: flex;
+                justify-content: center; /* Centrar horizontalmente */
+                align-items: center;    /* Centrar verticalmente si es necesario */
+                width: 100vw;           /* Asegúrate de que el contenedor ocupe el ancho completo de la pantalla */
+                position: fixed;        /* Para mantenerlo centrado al hacer scroll */
+                top: 0;                 /* Ajusta según tu diseño, por ejemplo para que coincida con la navbar */
+                z-index: 1000;          /* Para asegurarte de que se muestre sobre otros elementos */
+            }
+
+
+            .btn-custom {
+                color: #A3C9D9;
+                background-color: #025373;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+                border-radius: 20px;
+            }
+
+            .btn-custom:hover {
+                color: #025373;
+                background-color: #A3C9D9; /* Color al pasar el ratón */
+                border-color: #A3C9D9;
+            }
+
+            .modal-content {
+                font-family: "Montserrat", sans-serif;
+                font-optical-sizing: auto;
+                font-style: normal;
+                background-color: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(40px);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+                z-index: 1;
+                color: #ffffff;
+            }
+        </style>
+
+        
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-light fixed-top">
+                <div class="container-fluid">
+                    <!-- Logo -->
+        
+                    <!-- Navbar toggle button for mobile -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+        
+                    <!-- Navbar content -->
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="P01_about_us.html">PROJECTS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="P01_about_us.html">CREATE</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="P01_about_us.html">ABOUT US</a>
+                            </li>
+                        </ul>
+        
+                        <div class="center-screen">
+                            <form class="d-flex" role="search">
+                                <a class="navbar-brand" href="P01_index.html">
+                                    <img src="img/logoss_black.png" alt="Logo" height="44" class="d-inline-block align-text-top">
+                                </a>
+                            </form>
+                        </div>
+                        
+        
+                        <!-- Icon (align right) -->
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" role="button" data-bs-toggle="modal" data-bs-target="#loginModal" style="color: #A3C9D9;">
+                                    <i class="fa-solid fa-user btn-acces" style="color: black; margin-right: 10px;"></i>
+                                </a>                                
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="P01_cart.html">
+                                    <i class="fa fa-bell"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
+        </header>
+        <main></main>
+        <footer>
+            <!-- place footer here -->
+        </footer>
+        <!-- Bootstrap JavaScript Libraries -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
