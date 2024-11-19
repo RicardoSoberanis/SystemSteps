@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Title</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+    
+        <script src="https://kit.fontawesome.com/272ccf80e4.js" crossorigin="anonymous"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                    <input type="email" id="email" class="form-control" placeholder="Ingresa tu correo" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" id="password" class="form-control" placeholder="Ingresa tu contraseña" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">Recordar</label>
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn btn-custom">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p>¿No tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate aquí</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .navbar {
+                padding: 0.5rem 1rem;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1050;
+                font-family: "Montserrat", sans-serif;
+                font-optical-sizing: auto;
+                font-style: normal;
+            }
+
+            .navbar-brand {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            @media (max-width: 991px) {
+                .navbar-brand {
+                    position: relative;
+                    left: 0;
+                    transform: none;
+                }
+            }
+
+            .text-custom{
+                color: #ffffff;
+                font-family: "Montserrat", sans-serif;
+                font-optical-sizing: auto;
+                font-style: normal;
+            }
+
+            .btn-custom {
+                color: #00a9f2;
+                background-color: #ffffff;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+                border-radius: 20px;
+            }
+
+            .btn-custom:hover {
+                color: #ffffff;
+                background-color: transparent;
+            }
+
+            .carousel-section {
+                padding: 2rem 0;
+                max-width: 800px; 
+                margin: 0 auto;
+            }
+
+            .carousel-title {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                text-align: center;
+                margin-bottom: 1.5rem;
+                font-size: 1.5rem;
+                color: #00a9f2;
+            }
+
+            .carousel {
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .image-container {
+                position: relative;
+                width: 100%;
+                height: 400px;  /* Altura fija para todas las imágenes */
+                overflow: hidden;
+            }
+
+            .image-container::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(
+                    to bottom,
+                    rgba(255, 255, 255, 0) 30%,
+                    rgba(255, 255, 255, 0.8) 100%
+                );
+                pointer-events: none;
+            }
+
+            .carousel-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            /* Estilos para los indicadores */
+            .carousel-indicators {
+                bottom: -40px;
+            }
+
+            .carousel-indicators li {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                margin: 0 5px;
+                background-color: #00a9f2;
+                opacity: 0.5;
+            }
+
+            .carousel-indicators .active {
+                opacity: 1;
+            }
+
+            .carousel-control-prev,
+            .carousel-control-next {
+                width: 40px;
+                height: 40px;
+                background-color: #00a9f2;
+                border-radius: 50%;
+                top: 50%;
+                transform: translateY(-50%);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .carousel:hover .carousel-control-prev,
+            .carousel:hover .carousel-control-next {
+                opacity: 1;
+            }
+
+            .carousel-control-prev {
+                left: 20px;
+            }
+
+            .carousel-control-next {
+                right: 20px;
+            }
+
+            @media (max-width: 768px) {
+                .image-container {
+                    height: 300px;
+                }
+                
+                .carousel-section {
+                    padding: 1rem;
+                }
+                
+                .carousel-control-prev,
+                .carousel-control-next {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+
+
+            .modal-content {
+                font-family: "Montserrat", sans-serif;
+                font-optical-sizing: auto;
+                font-style: normal;
+                background-color: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(40px);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+                color: #ffffff;
+            }
+
+            main {
+                padding-top: 76px; 
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <a class="navbar-brand d-none d-lg-block" href="index.html">
+                        <img src="img/logoss_black.png" alt="Logo" height="44" class="d-inline-block align-text-top">
+                    </a>
+        
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="projects.html">PROJECTS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="P01_about_us.html">CREATE</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="aboutus.html">ABOUT US</a>
+                            </li>
+                        </ul>
+                        
+                        <ul class="navbar-nav ms-auto d-flex align-items-center">
+                            <li class="nav-item">
+                                <a class="nav-link" role="button" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                    <i class="nav-link" style="color: black; margin-right: 10px;">Log In</i>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="profile.html">
+                                    <i class="fa-solid fa-user" style="color: black; margin-right: 10px; margin-top: 5px;"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="notifications.html">
+                                    <i class="fa fa-bell" style="color: black; margin-right: 10px; margin-top: 5px;"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-fluid bg-light d-flex align-items-center justify-content-center" style="min-height: 100vh; background: url('./img/374e5ae9ce0aa9f3dbe2d73e07c922b5.gif') no-repeat center center/cover;">
+            <section class="row align-items-center w-100">
+              <div class="col-md-6 px-4">
+                <h1 class="fs-3 fw-bold text-custom">¡Bienvenido a SystemStep!</h1><br><br>
+                <p class="text-custom">
+                  En <strong>SystemStep</strong>, compartimos y aprendemos juntos. Este espacio es un repositorio creado por y para estudiantes del <strong>ITESO</strong> 
+                  para documentar y explorar proyectos paso a paso. ¡Colabora, inspírate y deja tu huella!
+                </p>
+                <a href="projects.html" class="btn btn-custom mt-3">VIEW PROJECTS
+                  <i class="fa-solid fa-arrow-right ms-2"></i>
+                </a>
+              </div>
+            </section>
+        </main>
+
+        <div class="carousel-section">
+            <p class="carousel-title">NOTICIAS IMPORTANTES</p>
+            <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li
+                        data-bs-target="#carouselId"
+                        data-bs-slide-to="0"
+                        class="active"
+                        aria-current="true"
+                        aria-label="First slide"
+                    ></li>
+                    <li
+                        data-bs-target="#carouselId"
+                        data-bs-slide-to="1"
+                        aria-label="Second slide"
+                    ></li>
+                    <li
+                        data-bs-target="#carouselId"
+                        data-bs-slide-to="2"
+                        aria-label="Third slide"
+                    ></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <div class="image-container">
+                            <img
+                                src="./img/ITESO_OscarCastroJorgeFuentesRodrigoFloreseItzkuauhtliZamora.jpg"
+                                class="carousel-image"
+                                alt="First slide"
+                            />
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="image-container">
+                            <img
+                                src="./img/ITESO_PamelaDehesa3.jpg"
+                                class="carousel-image"
+                                alt="Second slide"
+                            />
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="image-container">
+                            <img
+                                src="./img/ITESO_JuanSebastianRamirezRamirez.jpg"
+                                class="carousel-image"
+                                alt="Third slide"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselId"
+                    data-bs-slide="prev"
+                >
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselId"
+                    data-bs-slide="next"
+                >
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <div></div>
+
+        <footer class="text-center">
+            <br><br>
+            <p>&copy; 2024 SystemStep. Creado por estudiantes del ITESO.</p>
+        </footer>
+        <!-- Bootstrap JavaScript Libraries -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
