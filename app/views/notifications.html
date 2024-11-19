@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <title>Notifications</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.3.2 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/notifications.css">
+
+</head>
+<body>
+<header>
+   
+
+
+    <div class="octoNavbar container">
+        <div class="row justify-content-center">
+            <a
+                    name=""
+                    id=""
+                    class="btn-sencillo btn col-4"
+                    href="#"
+                    role="button"
+                    ></a
+                >
+            <a
+                    name=""
+                    id=""
+                    class="btn-mid btn col-4"
+                    href="#"
+                    role="button"
+                    ></a
+                >
+            <a
+                    name=""
+                    id=""
+                    class="btn-mid btn col-4"
+                    href="#"
+                    role="button"
+                    ></a
+                >
+            <a
+                    name=""
+                    id=""
+                    class="btn-mid btn col-4"
+                    href="#"
+                    role="button"
+                    ></a
+                >
+            <input class="col-6" type="text" id="input-navi" placeholder="Buscar...">
+            <a
+                    name=""
+                    id=""
+                    class="btn-sencillo2 btn col-4"
+                    href="#"
+                    role="button"
+                    ></a
+                >
+                <a
+                name=""
+                id=""
+                class="btn-sencillo2 btn col-4"
+                href="#"
+                role="button"
+                ></a
+            >
+        </div>
+    </div>
+</header>
+<main>
+    <div class="container-notifications container">
+        <aside class="sidebar">
+            <h3>Notifications</h3>
+            <ul>
+                <li onclick="showNotification('notif1')">Notification 1</li>
+                <li onclick="showNotification('notif2')">Notification 2</li>
+                <li onclick="showNotification('notif3')">Notification 3</li>
+                <li onclick="showNotification('notif4')">Notification 4</li>
+                <li onclick="showNotification('notif5')">Notification 5</li>
+            </ul>
+        </aside>
+        <main class="main-content">
+            <div id="notif1" class="notification-detail" style="display: none;">
+                <h3>Notification 1</h3>
+                <p>Notification details 1</p>
+            </div>
+            <div id="notif2" class="notification-detail" style="display: none;">
+                <h3>Notification 2</h3>
+                <p>Notification details 2</p>
+            </div>
+            <div id="notif3" class="notification-detail" style="display: none;">
+                <h3>Notification 3</h3>
+                <p>Notification details 3</p>
+            </div>
+            <div id="notif4" class="notification-detail" style="display: none;">
+                <h3>Notification 4</h3>
+                <p>Notification details 4</p>
+            </div>
+            <div id="notif5" class="notification-detail" style="display: none;">
+                <h3>Notification 5</h3>
+                <p>Notification details 5</p>
+            </div>
+            <div class="action-bar">
+                <button onclick="closeNotification()">Close</button>
+            </div>
+        </main>
+    </div>
+</main>
+
+
+<footer>
+    <div class="container">
+        <div class="row justify-content-center">
+            <h2 class="col-6 mt-5 mb-2" style="text-align: center; text-transform: uppercase; letter-spacing: 10px;">contribuye</h2>
+            <p style="text-align: center;" >Compartiendo ganamos todos</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JavaScript Libraries -->
+<script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"
+></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"
+></script>
+
+<script>
+    function showNotification(id) {
+        document.querySelectorAll('.notification-detail').forEach(el => el.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
+
+    function closeNotification() {
+        document.querySelectorAll('.notification-detail').forEach(el => el.style.display = 'none');
+    }
+</script>
+
+
+
+</body>
+</html>
