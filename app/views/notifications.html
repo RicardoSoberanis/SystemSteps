@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <title>Title</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+    
+        <script src="https://kit.fontawesome.com/272ccf80e4.js" crossorigin="anonymous"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                    <input type="email" id="email" class="form-control" placeholder="Ingresa tu correo" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" id="password" class="form-control" placeholder="Ingresa tu contraseña" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">Recordar</label>
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn btn-custom">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p>¿No tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate aquí</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            body {
+                font-family: "Montserrat", sans-serif;
+                background-color: #787cfe;
+            }
+
+            .card {
+                border-radius: 8px; /* Redondeo de bordes */
+                background-color: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(25px);
+                box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Sombra leve */
+                transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones */
+            }
+
+            .card:hover {
+                transform: translateY(-5px); /* Elevación al pasar el cursor */
+                box-shadow: 0 0 20px rgba(0,0,0,0.15); /* Mayor sombra */
+            }
+
+            .navbar {
+                padding: 0.5rem 1rem;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1050;
+                font-family: "Montserrat", sans-serif;
+                font-optical-sizing: auto;
+                font-style: normal;
+            }
+
+            @media (max-width: 991px) {
+                .navbar-brand {
+                    position: relative;
+                    left: 0;
+                    transform: none;
+                }
+            }
+
+            .search-bar-custom{
+                border-radius: 20px;
+                background-color: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(25px);
+                box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Sombra leve */
+            }
+
+            .container-notifications {
+                height: calc(100vh - 80px);
+                display: flex;
+                padding-top: 20px;
+            }
+
+            .sidebar {
+                width: 30%;
+                border-radius: 8px; /* Redondeo de bordes */
+                background-color: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(25px);
+                padding: 20px;
+                overflow-y: auto;
+                border-radius: 10px;
+            }
+
+            .sidebar ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            .sidebar ul li {
+                background-color: #dcdcff;
+                margin-bottom: 10px;
+                padding: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .sidebar ul li:hover {
+                transform: translateY(-2px); /* Elevación al pasar el cursor */
+                box-shadow: 0 0 20px rgba(0,0,0,0.15); /* Mayor sombra */
+                background-color: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(25px);
+            }
+
+            .main-content {
+                width: 70%;
+                padding: 20px;
+                margin-left: 10px;
+                border-radius: 8px; /* Redondeo de bordes */
+                background-color: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(25px);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .notification-detail {
+                flex-grow: 1;
+                background-color: #dcdcff;
+                padding: 20px;
+                border-radius: 10px;
+            }
+
+            .action-bar {
+                text-align: right;
+                margin-top: 10px;
+            }
+
+            .action-bar button {
+                background-color: #787cfe;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 8px;
+                border: none;
+                cursor: pointer;
+            }
+
+            main {
+                padding-top: 76px; 
+            }
+        </style>
+
+    </head>
+    <body>
+    <header>
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="./img/logoss_black_iso.png" alt="Logo" height="44" class="d-inline-block align-text-top">
+                </a>
+        
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="projects.html">PROJECTS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="P01_about_us.html">CREATE</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="aboutus.html">ABOUT US</a>
+                        </li>
+                    </ul>
+        
+                    <!-- Barra de búsqueda -->
+                    <form class="d-flex ms-auto" role="search">
+                        <input class="form-control me-2 search-bar-custom" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-custom" type="submit">Search</button>
+                    </form>
+        
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                <i class="fa-solid fa-user btn-acces" style="color: black; margin-right: 10px;"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="notifications.html">
+                                <i class="fa fa-bell"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container-notifications container">
+            <aside class="sidebar">
+                <h3>Notifications</h3>
+                <ul>
+                    <li onclick="showNotification('notif1')">Notification 1</li>
+                    <li onclick="showNotification('notif2')">Notification 2</li>
+                    <li onclick="showNotification('notif3')">Notification 3</li>
+                    <li onclick="showNotification('notif4')">Notification 4</li>
+                    <li onclick="showNotification('notif5')">Notification 5</li>
+                </ul>
+            </aside>
+            <main class="main-content">
+                <div id="notif1" class="notification-detail" style="display: none;">
+                    <h3>Notification 1</h3>
+                    <p>Notification details 1</p>
+                </div>
+                <div id="notif2" class="notification-detail" style="display: none;">
+                    <h3>Notification 2</h3>
+                    <p>Notification details 2</p>
+                </div>
+                <div id="notif3" class="notification-detail" style="display: none;">
+                    <h3>Notification 3</h3>
+                    <p>Notification details 3</p>
+                </div>
+                <div id="notif4" class="notification-detail" style="display: none;">
+                    <h3>Notification 4</h3>
+                    <p>Notification details 4</p>
+                </div>
+                <div id="notif5" class="notification-detail" style="display: none;">
+                    <h3>Notification 5</h3>
+                    <p>Notification details 5</p>
+                </div>
+                <div class="action-bar">
+                    <button onclick="closeNotification()">Close</button>
+                </div>
+            </main>
+        </div>
+    </main>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"
+    ></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"
+    ></script>
+
+    <script>
+        function showNotification(id) {
+            document.querySelectorAll('.notification-detail').forEach(el => el.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function closeNotification() {
+            document.querySelectorAll('.notification-detail').forEach(el => el.style.display = 'none');
+        }
+    </script>
+    </body>
+</html>
