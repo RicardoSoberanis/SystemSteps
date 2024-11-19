@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html>
 <head>
     <title>Notifications</title>
     <meta charset="utf-8" />
@@ -13,116 +13,77 @@
         crossorigin="anonymous"
     />
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/notifications.css">
+    <link rel="stylesheet" href="styles/navbar.css">
 
 </head>
 <body>
 <header>
-   
-
-
     <div class="octoNavbar container">
         <div class="row justify-content-center">
-            <a
-                    name=""
-                    id=""
-                    class="btn-sencillo btn col-4"
-                    href="#"
-                    role="button"
-                    ></a
-                >
-            <a
-                    name=""
-                    id=""
-                    class="btn-mid btn col-4"
-                    href="#"
-                    role="button"
-                    ></a
-                >
-            <a
-                    name=""
-                    id=""
-                    class="btn-mid btn col-4"
-                    href="#"
-                    role="button"
-                    ></a
-                >
-            <a
-                    name=""
-                    id=""
-                    class="btn-mid btn col-4"
-                    href="#"
-                    role="button"
-                    ></a
-                >
+            <a class="btn-sencillo btn col-4" href="#" role="button"></a>
+            <a class="btn-mid btn col-4" href="#" role="button"></a>
+            <a class="btn-mid btn col-4" href="#" role="button"></a>
+            <a class="btn-mid btn col-4" href="#" role="button"></a>
             <input class="col-6" type="text" id="input-navi" placeholder="Buscar...">
-            <a
-                    name=""
-                    id=""
-                    class="btn-sencillo2 btn col-4"
-                    href="#"
-                    role="button"
-                    ></a
-                >
-                <a
-                name=""
-                id=""
-                class="btn-sencillo2 btn col-4"
-                href="#"
-                role="button"
-                ></a
-            >
+            <a class="btn-sencillo2 btn col-4" href="#" role="button"></a>
+            <a class="btn-sencillo2 btn col-4" href="#" role="button"></a>
         </div>
     </div>
 </header>
+
+
 <main>
     <div class="container-notifications container">
-        <aside class="sidebar">
-            <h3>Notifications</h3>
+        <div class="sidebar">
+            <h3>Folders</h3>
             <ul>
-                <li onclick="showNotification('notif1')">Notification 1</li>
-                <li onclick="showNotification('notif2')">Notification 2</li>
-                <li onclick="showNotification('notif3')">Notification 3</li>
-                <li onclick="showNotification('notif4')">Notification 4</li>
-                <li onclick="showNotification('notif5')">Notification 5</li>
+                <li class="category" onclick="filterCategory('all')">All</li>
+                <li class="category" onclick="filterCategory('important')">Important</li>
+                <li class="category" onclick="filterCategory('favorites')">Favorites</li>
             </ul>
-        </aside>
-        <main class="main-content">
-            <div id="notif1" class="notification-detail" style="display: none;">
+            <h3>Notificaciones</h3>
+            <ul id="notifications-list">
+                <li class="important" onclick="showNotification('notif1', this)">Notification 1</li>
+                <li class="favorites" onclick="showNotification('notif2', this)">Notification 2</li>
+                <li class="important" onclick="showNotification('notif3', this)">Notification 3</li>
+                <li class="favorites" onclick="showNotification('notif4', this)">Notification 4</li>
+                <li class="important" onclick="showNotification('notif5', this)">Notification 5</li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div id="notif1" class="notification-detail">
                 <h3>Notification 1</h3>
-                <p>Notification details 1</p>
+                <p>Details 1</p>
             </div>
-            <div id="notif2" class="notification-detail" style="display: none;">
+            <div id="notif2" class="notification-detail">
                 <h3>Notification 2</h3>
-                <p>Notification details 2</p>
+                <p>Details 2</p>
             </div>
-            <div id="notif3" class="notification-detail" style="display: none;">
+            <div id="notif3" class="notification-detail">
                 <h3>Notification 3</h3>
-                <p>Notification details 3</p>
+                <p>Details 3</p>
             </div>
-            <div id="notif4" class="notification-detail" style="display: none;">
+            <div id="notif4" class="notification-detail">
                 <h3>Notification 4</h3>
-                <p>Notification details 4</p>
+                <p>Details 4</p>
             </div>
-            <div id="notif5" class="notification-detail" style="display: none;">
+            <div id="notif5" class="notification-detail">
                 <h3>Notification 5</h3>
-                <p>Notification details 5</p>
+                <p>Details 5</p>
             </div>
             <div class="action-bar">
                 <button onclick="closeNotification()">Close</button>
             </div>
-        </main>
+        </div>
     </div>
 </main>
-
 
 <footer>
     <div class="container">
         <div class="row justify-content-center">
             <h2 class="col-6 mt-5 mb-2" style="text-align: center; text-transform: uppercase; letter-spacing: 10px;">contribuye</h2>
-            <p style="text-align: center;" >Compartiendo ganamos todos</p>
+            <p style="text-align: center;">Compartiendo ganamos todos</p>
         </div>
     </div>
 </footer>
@@ -139,18 +100,46 @@
     crossorigin="anonymous"
 ></script>
 
+
+
+
+<!--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   -->
+<!--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   -->
+<!--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   -->
+<!--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   -->
+<!--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   -->
+
+
 <script>
-    function showNotification(id) {
-        document.querySelectorAll('.notification-detail').forEach(el => el.style.display = 'none');
+    function showNotification(id, element) {
+        document.querySelectorAll('.notification-detail').forEach(el => {
+            el.style.display = 'none';
+        });
+        document.querySelectorAll('.sidebar ul li').forEach(el => el.classList.remove('selected'));
         document.getElementById(id).style.display = 'block';
+        element.classList.add('selected');
     }
 
     function closeNotification() {
         document.querySelectorAll('.notification-detail').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.sidebar ul li').forEach(el => el.classList.remove('selected'));
+    }
+
+    function filterCategory(category) {
+        document.querySelectorAll('#notifications-list li').forEach(el => {
+            if (category === 'all' || el.classList.contains(category)) {
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
+            }
+        });
     }
 </script>
-
-
-
 </body>
 </html>
+
+
+
+
+
+
