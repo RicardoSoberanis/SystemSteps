@@ -93,9 +93,77 @@
 
         <div class="profile-actions">
             <a href="#" class="btn btn-secondary">Editar Perfil</a>
+            <a href="#" class=" btn" data-bs-toggle="modal" data-bs-target="#badgesModal">Insignias</a>
             <a href="#" class="btn">Mis Proyectos</a>
         </div>
+
+
+
+
+
+
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Mis Insignias</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    
+                    <div class="modal-body">
+                        <form>
+                            <div class="badge-row">
+                                <i class = "fas fa-project-diagram "></i>
+
+                                <div class="contributor">
+                                    <h6>Contribuidor:</h6>
+                                    <p>Nivel: X</p>
+                                    <p>Proyectos: x</p>
+                                    <P>Proyectos para siguiente nivel:</P>
+                                </div>
+                            </div>
+
+
+                            <div class="badge-row">
+                                <i class = "fas fa-thumbs-up"></i>
+                                 <div class="utility">
+                                    <h6>Utilidad:</h6>
+                                    <p>Nivel: X</p>
+                                    <p>Likes: x</p>
+                                    <P>Likes para siguiente nivel:</P>
+                                </div>
+                            </div>
+
+
+
+                            <div class="badge-row">
+                                <i class = "fas fa-comments"></i>
+                                 <div class="guardian">
+                                    <h6>Guardian:</h6>
+                                    <p>Nivel: X</p>
+                                    <p>Comentarios: x</p>
+                                    <P>Comentarios para siguiente nivel:</P>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
+
+
+
+
+
+
+
 
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
