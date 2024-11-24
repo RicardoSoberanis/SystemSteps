@@ -1,61 +1,21 @@
 <!doctype html>
-<html lang="es">
-    <head>
-        <title>Title</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<html>
 
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
-    
+<head>
+    <title>Notifications</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.3.2 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <script src="https://kit.fontawesome.com/272ccf80e4.js" crossorigin="anonymous"></script>
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/notification.css">
+    <link rel="stylesheet" href="styles/navbar.css">
 
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Correo</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-                                    <input type="email" id="email" class="form-control" placeholder="Ingresa tu correo" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Contraseña</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-                                    <input type="password" id="password" class="form-control" placeholder="Ingresa tu contraseña" required>
-                                </div>
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="rememberMe">
-                                <label class="form-check-label" for="rememberMe">Recordar</label>
-                            </div>
-                            <div style="text-align: center;">
-                                <button type="submit" class="btn btn-custom">Login</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <p>¿No tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate aquí</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <style>
-            body {
+    <style>
+         body {
                 font-family: "Montserrat", sans-serif;
                 background-color: #787cfe;
             }
@@ -72,7 +32,6 @@
                 transform: translateY(-5px); /* Elevación al pasar el cursor */
                 box-shadow: 0 0 20px rgba(0,0,0,0.15); /* Mayor sombra */
             }
-
             .navbar {
                 padding: 0.5rem 1rem;
                 position: fixed;
@@ -98,7 +57,6 @@
                 backdrop-filter: blur(25px);
                 box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Sombra leve */
             }
-
             .container-notifications {
                 height: calc(100vh - 80px);
                 display: flex;
@@ -172,117 +130,164 @@
             main {
                 padding-top: 76px; 
             }
-        </style>
 
-    </head>
-    <body>
+    </style>
+
+</head>
+
+<body>
     <header>
-        <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">
-                    <img src="./img/logoss_black_iso.png" alt="Logo" height="44" class="d-inline-block align-text-top">
-                </a>
-        
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-        
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="projects.html">PROJECTS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="P01_about_us.html">CREATE</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="aboutus.html">ABOUT US</a>
-                        </li>
+        <header>
+            <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="./img/logoss_black_iso.png" alt="Logo" height="44"
+                            class="d-inline-block align-text-top">
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="projects.html">PROJECTS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="createProject.html">CREATE</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="aboutus.html">ABOUT US</a>
+                            </li>
+                        </ul>
+                        <!-- Barra de búsqueda -->
+                        <form class="d-flex ms-auto" role="search">
+                            <input class="form-control me-2 search-bar-custom" type="search" placeholder="Search"
+                                aria-label="Search">
+                            <button class="btn btn-custom" type="submit">Search</button>
+                        </form>
+
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="profile.html" role="button" data-bs-toggle="modal"
+                                    data-bs-target="#loginModal">
+                                    <i class="fa-solid fa-user btn-acces" style="color: black; margin-right: 10px;"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="notifications.html">
+                                    <i class="fa fa-bell"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+
+        <main>
+            <div class="container-notifications container">
+                <div class="sidebar">
+                    <h3>Folders</h3>
+                    <ul>
+                        <li class="category" onclick="filterCategory('all')">All</li>
+                        <li class="category" onclick="filterCategory('important')">Important</li>
+                        <li class="category" onclick="filterCategory('favorites')">Favorites</li>
                     </ul>
-        
-                    <!-- Barra de búsqueda -->
-                    <form class="d-flex ms-auto" role="search">
-                        <input class="form-control me-2 search-bar-custom" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-custom" type="submit">Search</button>
-                    </form>
-        
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" role="button" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                <i class="fa-solid fa-user btn-acces" style="color: black; margin-right: 10px;"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="notifications.html">
-                                <i class="fa fa-bell"></i>
-                            </a>
-                        </li>
+                    <h3>Notificaciones</h3>
+                    <ul id="notifications-list">
+                        <li class="important" onclick="showNotification('notif1', this)">Notification 1</li>
+                        <li class="favorites" onclick="showNotification('notif2', this)">Notification 2</li>
+                        <li class="important" onclick="showNotification('notif3', this)">Notification 3</li>
+                        <li class="favorites" onclick="showNotification('notif4', this)">Notification 4</li>
+                        <li class="important" onclick="showNotification('notif5', this)">Notification 5</li>
                     </ul>
+                </div>
+                <div class="main-content">
+                    <div id="notif1" class="notification-detail">
+                        <h3>Notification 1</h3>
+                        <p>Details 1</p>
+                    </div>
+                    <div id="notif2" class="notification-detail">
+                        <h3>Notification 2</h3>
+                        <p>Details 2</p>
+                    </div>
+                    <div id="notif3" class="notification-detail">
+                        <h3>Notification 3</h3>
+                        <p>Details 3</p>
+                    </div>
+                    <div id="notif4" class="notification-detail">
+                        <h3>Notification 4</h3>
+                        <p>Details 4</p>
+                    </div>
+                    <div id="notif5" class="notification-detail">
+                        <h3>Notification 5</h3>
+                        <p>Details 5</p>
+                    </div>
+                    <div class="action-bar">
+                        <button onclick="closeNotification()">Close</button>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <main>
-        <div class="container-notifications container">
-            <aside class="sidebar">
-                <h3>Notifications</h3>
-                <ul>
-                    <li onclick="showNotification('notif1')">Notification 1</li>
-                    <li onclick="showNotification('notif2')">Notification 2</li>
-                    <li onclick="showNotification('notif3')">Notification 3</li>
-                    <li onclick="showNotification('notif4')">Notification 4</li>
-                    <li onclick="showNotification('notif5')">Notification 5</li>
-                </ul>
-            </aside>
-            <main class="main-content">
-                <div id="notif1" class="notification-detail" style="display: none;">
-                    <h3>Notification 1</h3>
-                    <p>Notification details 1</p>
-                </div>
-                <div id="notif2" class="notification-detail" style="display: none;">
-                    <h3>Notification 2</h3>
-                    <p>Notification details 2</p>
-                </div>
-                <div id="notif3" class="notification-detail" style="display: none;">
-                    <h3>Notification 3</h3>
-                    <p>Notification details 3</p>
-                </div>
-                <div id="notif4" class="notification-detail" style="display: none;">
-                    <h3>Notification 4</h3>
-                    <p>Notification details 4</p>
-                </div>
-                <div id="notif5" class="notification-detail" style="display: none;">
-                    <h3>Notification 5</h3>
-                    <p>Notification details 5</p>
-                </div>
-                <div class="action-bar">
-                    <button onclick="closeNotification()">Close</button>
-                </div>
-            </main>
-        </div>
-    </main>
+        </main>
 
-    <!-- Bootstrap JavaScript Libraries -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"
-    ></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-        crossorigin="anonymous"
-    ></script>
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <h2 class="col-6 mt-5 mb-2"
+                        style="text-align: center; text-transform: uppercase; letter-spacing: 10px;">contribuye</h2>
+                    <p style="text-align: center;">Compartiendo ganamos todos</p>
+                </div>
+            </div>
+        </footer>
 
-    <script>
-        function showNotification(id) {
-            document.querySelectorAll('.notification-detail').forEach(el => el.style.display = 'none');
-            document.getElementById(id).style.display = 'block';
-        }
+        <!-- Bootstrap JavaScript Libraries -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"></script>
 
-        function closeNotification() {
-            document.querySelectorAll('.notification-detail').forEach(el => el.style.display = 'none');
-        }
-    </script>
-    </body>
+
+
+
+        <!--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   -->
+        <!--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   -->
+        <!--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   -->
+        <!--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   -->
+        <!--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   -->
+
+
+        <script>
+            function showNotification(id, element) {
+                document.querySelectorAll('.notification-detail').forEach(el => {
+                    el.style.display = 'none';
+                });
+                document.querySelectorAll('.sidebar ul li').forEach(el => el.classList.remove('selected'));
+                document.getElementById(id).style.display = 'block';
+                element.classList.add('selected');
+            }
+
+            function closeNotification() {
+                document.querySelectorAll('.notification-detail').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.sidebar ul li').forEach(el => el.classList.remove('selected'));
+            }
+
+            function filterCategory(category) {
+                document.querySelectorAll('#notifications-list li').forEach(el => {
+                    if (category === 'all' || el.classList.contains(category)) {
+                        el.style.display = 'block';
+                    } else {
+                        el.style.display = 'none';
+                    }
+                });
+            }
+        </script>
+</body>
+
 </html>

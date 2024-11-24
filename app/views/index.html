@@ -54,6 +54,48 @@
             </div>
         </div>
 
+        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registerModalLabel">Crear Cuenta</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label">Correo</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                    <input type="email" id="registerEmail" class="form-control" placeholder="Ingresa tu correo" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label">Contraseña</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" id="registerPassword" class="form-control" placeholder="Ingresa tu contraseña" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirma tu contraseña" required>
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn btn-custom">Registrarse</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p>¿Ya tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión aquí</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <style>
             .navbar {
                 padding: 0.5rem 1rem;
@@ -244,7 +286,7 @@
                                 <a class="nav-link" href="projects.html">PROJECTS</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="P01_about_us.html">CREATE</a>
+                                <a class="nav-link" href="createProject.html">CREATE</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="aboutus.html">ABOUT US</a>
