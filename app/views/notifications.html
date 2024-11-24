@@ -165,7 +165,9 @@
                 transform: translateY(-5px); /* Elevación al pasar el cursor */
                 box-shadow: 0 0 20px rgba(0,0,0,0.15); /* Mayor sombra */
             }
+
             .navbar {
+                margin-top: 5px;
                 padding: 0.5rem 1rem;
                 position: fixed;
                 width: 100%;
@@ -174,6 +176,12 @@
                 font-family: "Montserrat", sans-serif;
                 font-optical-sizing: auto;
                 font-style: normal;
+            }
+
+            .navbar.scrolled {
+                background-color: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(15px);
+                border-radius: 50px;
             }
 
             @media (max-width: 991px) {
@@ -420,6 +428,7 @@
                 });
             }
         </script>
+        <script src="./styles/navbar.js"></script>
 </body>
 
 </html>
