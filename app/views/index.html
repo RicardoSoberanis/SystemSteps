@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Title</title>
+        <title>Bienvenido a SystemSteps</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
@@ -90,6 +90,58 @@
                     </div>
                     <div class="modal-footer">
                         <p>¿Ya tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión aquí</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="registerInfoModal" tabindex="-1" aria-labelledby="registerInfoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registerInfoModalLabel">Completa tu Perfil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="registerUsername" class="form-label">Nombre de Usuario</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                                    <input type="text" id="registerUsername" class="form-control" placeholder="Elige un nombre de usuario" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerFullName" class="form-label">Nombre Completo</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                                    <input type="text" id="registerFullName" class="form-control" placeholder="Ingresa tu nombre completo" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerAge" class="form-label">Edad</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-calendar"></i></span>
+                                    <input type="number" id="registerAge" class="form-control" placeholder="Ingresa tu edad" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerCareer" class="form-label">Carrera</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-graduation-cap"></i></span>
+                                    <input type="text" id="registerCareer" class="form-control" placeholder="Ingresa tu carrera" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="termsCheck" required>
+                                <label class="form-check-label" for="termsCheck">
+                                    Acepto los <a href="#" target="_blank">Términos y Condiciones</a>
+                                </label>
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn btn-custom">Completar Registro</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
