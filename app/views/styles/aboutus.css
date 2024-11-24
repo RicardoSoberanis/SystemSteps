@@ -1,13 +1,21 @@
-.aboutus-infomation {
-    background-color: #D4D4F4;
-    width: 50vw;
-    height: 500px;
-    border-radius: 25px;
+body{
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 35%, #8a63a9 100%);
 }
 
-.img-octo {
-    height: 200px;
-    width: 200px;
-    margin-top: 20vh;
-    margin-left: 7vw;
+.navbar {
+    padding: 0.5rem 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1050;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.navbar-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }

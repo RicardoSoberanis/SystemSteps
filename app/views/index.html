@@ -149,6 +149,7 @@
 
         <style>
             .navbar {
+                margin-top: 5px;
                 padding: 0.5rem 1rem;
                 position: fixed;
                 width: 100%;
@@ -157,6 +158,12 @@
                 font-family: "Montserrat", sans-serif;
                 font-optical-sizing: auto;
                 font-style: normal;
+            }
+
+            .navbar.scrolled {
+                background-color: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(15px);
+                border-radius: 50px;
             }
 
             .navbar-brand {
@@ -473,5 +480,7 @@
             crossorigin="anonymous"
         >
     </script>
+
+    <script src="./styles/navbar.js"></script>
     </body>
 </html>
