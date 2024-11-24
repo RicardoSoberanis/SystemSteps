@@ -1,0 +1,21 @@
+{
+  "name": "systemsteps",
+  "version": "1.0.0",
+  "description": "SystemSteps es una plataforma diseñada para estudiantes universitarios del área de tecnología, con el objetivo de compartir y aprender proyectos de manera colaborativa a través de guías paso a paso.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
