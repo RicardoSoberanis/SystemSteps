@@ -1,7 +1,8 @@
 const express = require("express");
 const path = require('path');
-const productRouter = require('../routes/users');
-const adminProductRouter = require('../routes/projects');
+const userRouter = require('../routes/users');
+const projectRouter = require('../routes/projects');
+const newsRouter = require('../routes/news')
 
 const router = express.Router();
 
@@ -13,8 +14,9 @@ function validateAdmin(req, res, next) {
     next();
 }
 
-router.use('/users', productRouter);
-router.use("/projects", adminProductRouter);
+router.use('/users', userRouter);
+router.use("/projects", projectRouter);
+router.use('/news', newsRouter);
 
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'index.html'));
