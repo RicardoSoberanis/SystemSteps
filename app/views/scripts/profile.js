@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputs = document.querySelectorAll('.form-control');
 
     editButton.addEventListener('click', () => {
-        inputs.forEach(input => input.disabled = false); // Habilitar los campos
-        editButton.classList.add('d-none'); // Ocultar el botón "Editar"
-        saveButton.classList.remove('d-none'); // Mostrar el botón "Guardar"
+        inputs.forEach(input => input.disabled = false); 
+        editButton.classList.add('d-none'); 
+        saveButton.classList.remove('d-none'); 
     });
 
     saveButton.addEventListener('click', () => {
@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         console.log('Datos actualizados:', updatedData);
 
-        inputs.forEach(input => input.disabled = true); // Deshabilitar los campos
-        saveButton.classList.add('d-none'); // Ocultar el botón "Guardar"
-        editButton.classList.remove('d-none'); // Mostrar el botón "Editar"
+        inputs.forEach(input => input.disabled = true); 
+        saveButton.classList.add('d-none'); 
+        editButton.classList.remove('d-none'); 
     });
 });
