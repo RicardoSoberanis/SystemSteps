@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveButton = document.getElementById('saveProfile');
     const inputs = document.querySelectorAll('.form-control');
 
-    if(!editButton||!saveButton||inputs.lenght ==0){
+    if(!editButton||!saveButton||inputs.length ==0){
         console.error("Elementos rrquwridos no encontrados");
         return;
     }
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Edit button clickeado');
         inputs.forEach(input => {
             input.disabled = false });
-            
+
         editButton.classList.add('d-none'); 
         saveButton.classList.remove('d-none'); 
     });
