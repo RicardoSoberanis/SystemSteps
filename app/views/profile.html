@@ -15,6 +15,8 @@
         rel="stylesheet">
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/profile.css">
+    <script src="scripts/profile.js"></script>
+
 </head>
 
 <body>
@@ -68,8 +70,9 @@
             <div class="profile-avatar">JD</div>
             <div class="profile-info">
                 <h1>Juan Delgado</h1>
-                <p>Estudiante de Ingeniería de Software</p>
-                <p>ITESO - Universidad Jesuita de Guadalajara</p>
+                <input type="text" id="name" class="form-control" value="Juan Delgado" disabled>
+                <input type="text" id="role" class="form-control mt-2" value="Estudiante de Ingeniería de Software" disabled>
+                <input type="text" id="university" class="form-control mt-2" value="ITESO - Universidad Jesuita de Guadalajara" disabled>
             </div>
         </div>
 
@@ -78,7 +81,7 @@
             <ul>
                 <li>
                     <strong>Email:</strong>
-                    <span>juan.delgado@iteso.mx</span>
+                    <input type="email" id="email" class="form-control" value="juan.delgado@iteso.mx" disabled>
                 </li>
                 <li>
                     <strong>Proyectos Contribuidos:</strong>
@@ -117,8 +120,8 @@
                                 <i class = "fas fa-hand-holding"></i>
                                 <div class="contributor">
                                     <h6>Contribuidor:</h6>
-                                    <p>Nivel: X</p>
-                                    <p>Proyectos: x</p>
+                                    <p>Nivel:</p>
+                                    <p>Proyectos:</p>
                                     <P>Proyectos para siguiente nivel:</P>
                                 </div>
                             </div>
@@ -128,8 +131,8 @@
                                 <i class = "fas fa-thumbs-up"></i>
                                  <div class="utility">
                                     <h6>Utilidad:</h6>
-                                    <p>Nivel: X</p>
-                                    <p>Likes: x</p>
+                                    <p>Nivel:</p>
+                                    <p>Likes:</p>
                                     <P>Likes para siguiente nivel:</P>
                                 </div>
                             </div>
@@ -140,7 +143,7 @@
                                 <i class = "fas fa-shield-alt"></i>
                                  <div class="guardian">
                                     <h6>Guardian:</h6>
-                                    <p>Nivel: X</p>
+                                    <p>Nivel:</p>
                                     <p>Comentarios: </p>
                                     <P>Comentarios para siguiente nivel:</P>
                                 </div>
