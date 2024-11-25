@@ -13,145 +13,14 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Correo</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-                                    <input type="email" id="email" class="form-control" placeholder="Ingresa tu correo" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Contraseña</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-                                    <input type="password" id="password" class="form-control" placeholder="Ingresa tu contraseña" required>
-                                </div>
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="rememberMe">
-                                <label class="form-check-label" for="rememberMe">Recordar</label>
-                            </div>
-                            <div style="text-align: center;">
-                                <button type="submit" class="btn btn-custom">Login</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <p>¿No tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate aquí</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="registerModalLabel">Crear Cuenta</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="registerEmail" class="form-label">Correo</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-                                    <input type="email" id="registerEmail" class="form-control" placeholder="Ingresa tu correo" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="registerPassword" class="form-label">Contraseña</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-                                    <input type="password" id="registerPassword" class="form-control" placeholder="Ingresa tu contraseña" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-                                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirma tu contraseña" required>
-                                </div>
-                            </div>
-                            <div style="text-align: center;">
-                                <button type="submit" class="btn btn-custom">Registrarse</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <p>¿Ya tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión aquí</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="registerInfoModal" tabindex="-1" aria-labelledby="registerInfoModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="registerInfoModalLabel">Completa tu Perfil</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="registerUsername" class="form-label">Nombre de Usuario</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                                    <input type="text" id="registerUsername" class="form-control" placeholder="Elige un nombre de usuario" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="registerFullName" class="form-label">Nombre Completo</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
-                                    <input type="text" id="registerFullName" class="form-control" placeholder="Ingresa tu nombre completo" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="registerAge" class="form-label">Edad</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fa-solid fa-calendar"></i></span>
-                                    <input type="number" id="registerAge" class="form-control" placeholder="Ingresa tu edad" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="registerCareer" class="form-label">Carrera</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fa-solid fa-graduation-cap"></i></span>
-                                    <input type="text" id="registerCareer" class="form-control" placeholder="Ingresa tu carrera" required>
-                                </div>
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="termsCheck" required>
-                                <label class="form-check-label" for="termsCheck">
-                                    Acepto los <a href="#" target="_blank">Términos y Condiciones</a>
-                                </label>
-                            </div>
-                            <div style="text-align: center;">
-                                <button type="submit" class="btn btn-custom">Completar Registro</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
         <style>
-            body{
-                background: rgb(255,255,255);
-                background: linear-gradient(90deg, rgba(255,255,255,1) 35%, rgba(124,124,254,1) 100%); 
+            body {
+                background: whitesmoke;
+                min-height: 100vh;
+                position: relative;
+                font-family: "Montserrat", sans-serif;
             }
 
             .navbar {
@@ -161,9 +30,6 @@
                 width: 100%;
                 top: 0;
                 z-index: 1050;
-                font-family: "Montserrat", sans-serif;
-                font-optical-sizing: auto;
-                font-style: normal;
             }
 
             .navbar.scrolled {
@@ -172,97 +38,93 @@
                 border-radius: 50px;
             }
 
-            @media (max-width: 991px) {
-                .navbar-brand {
-                    position: relative;
-                    left: 0;
-                    transform: none;
-                }
-            }
-
-            .search-bar-custom{
+            .search-bar-custom {
                 border-radius: 20px;
-                background-color: rgba(255, 255, 255, 0.2);
-                backdrop-filter: blur(25px);
-                box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Sombra leve */
+                background-color: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
             }
 
-            .text-custom{
+            .text-custom {
                 color: #787cfe;
                 margin-left: 20px;
-                font-family: "Montserrat", sans-serif;
-                font-optical-sizing: auto;
-                font-style: normal;
             }
 
             .btn-custom {
                 color: #00a9f2;
                 background-color: #ffffff;
-                backdrop-filter: blur(10px);
-                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+                box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
                 border-radius: 20px;
+                transition: all 0.3s ease;
             }
 
             .btn-custom:hover {
                 color: #ffffff;
-                background-color: transparent;
+                background-color: #00a9f2;
             }
-
 
             main {
-                padding-top: 76px; 
+                padding-top: 76px;
+                position: relative;
+                z-index: 1;
             }
 
-            /* Estilo de tarjeta */
             .card {
-                border-radius: 8px; /* Redondeo de bordes */
-                background-color: rgba(255, 255, 255, 0.2);
-                backdrop-filter: blur(25px);
-                box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Sombra leve */
-                transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones */
+                border-radius: 8px;
+                background-color: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 0 15px rgba(0,0,0,0.1);
+                transition: transform 0.3s ease;
             }
 
             .card:hover {
-                transform: translateY(-5px); /* Elevación al pasar el cursor */
-                box-shadow: 0 0 20px rgba(0,0,0,0.15); /* Mayor sombra */
+                transform: translateY(-5px);
             }
 
             .card-img-top {
-                border-radius: 8px 8px 0 0; /* Redondeo de bordes en la parte superior de la tarjeta */
-                object-fit: cover; /* Ajuste de imagen */
-                height: 200px; /* Tamaño de la imagen */
+                border-radius: 8px 8px 0 0;
+                object-fit: cover;
+                height: 200px;
             }
 
-            .card-body {
-                padding: 20px; /* Espaciado dentro de la tarjeta */
+            .blob {
+                position: fixed;
+                width: 300px;
+                height: 300px;
+                border-radius: 50%;
+                filter: blur(30px);
+                opacity: 0.6;
+                pointer-events: none;
+                z-index: 0;
+                background: linear-gradient(47deg, #787cfe 21%, #00a9f2 67%, #172d9d 61%);
+                animation: float 10s ease-in-out infinite;
+                will-change: transform;
             }
 
-            .card-title {
-                font-weight: bold; /* Negrita */
-                color: #333; /* Color de texto */
-                font-family: "Montserrat", sans-serif;
-                font-optical-sizing: auto;
-                font-style: normal;
-            }
+            .blob:nth-child(1) { top: 5%; left: 10%; }
+            .blob:nth-child(2) { top: 50%; left: 30%; animation-delay: -2s; }
+            .blob:nth-child(3) { top: 80%; left: 70%; animation-delay: -4s; }
+            .blob:nth-child(4) { top: 25%; left: 80%; animation-delay: -6s; }
+            .blob:nth-child(5) { top: 90%; left: 5%; animation-delay: -8s; }
 
-            .card-text {
-                color: #666; /* Color de texto más claro */
-                font-size: 0.875rem; /* Tamaño de texto */
-                font-family: "Montserrat", sans-serif;
-                font-optical-sizing: auto;
-                font-style: normal;
+            @keyframes float {
+                0%, 100% {
+                    transform: translate(0, 0) scale(1);
+                }
+                50% {
+                    transform: translate(30px, -30px) scale(1.1);
+                }
             }
 
             .modal-content {
-                font-family: "Montserrat", sans-serif;
-                font-optical-sizing: auto;
-                font-style: normal;
-                background-color: rgba(255, 255, 255, 0.2);
-                backdrop-filter: blur(40px);
+                background-color: rgba(255, 255, 255, 0.95);
                 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
-                color: #ffffff;
+                color: #333;
             }
 
+            @media (max-width: 991px) {
+                .blob {
+                    opacity: 0.4;
+                }
+            }
         </style>
     </head>
 
@@ -321,7 +183,12 @@
         </header>
 
 
-        <main >
+        <main>
+            <div class="blob"></div>
+            <div class="blob"></div>
+            <div class="blob"></div>
+            <div class="blob"></div>
+            <div class="blob"></div>
             <h3 class="text-custom">
                 Más recientes
             </h3>
@@ -385,12 +252,8 @@
             </div>
             
         </main>
-
-
-        <div></div>
-
         <footer class="text-center">
-            <br><br>
+            <br><br><br>
             <p>&copy; 2024 SystemStep. Creado por estudiantes del ITESO.</p>
         </footer>
         <!-- Bootstrap JavaScript Libraries -->

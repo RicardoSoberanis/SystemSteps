@@ -1,67 +1,123 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SystemStep - Inicio</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <header>
-    <h1>SystemStep</h1>
-    <nav>
-      <ul>
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#">Proyectos</a></li>
-        <li><a href="#">Anuncios</a></li>
-        <li><a href="#">Subir Proyecto</a></li>
-        <li><a href="#">Contacto</a></li>
-        <li><a href="#">Login</a></li>
-      </ul>
-    </nav>
-  </header>
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Animated Blobs</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-  <main>
-    <!-- Bienvenida -->
-    <section class="welcome">
-      <h2>¡Bienvenido a SystemStep!</h2>
-      <p>Comparte tus proyectos paso a paso y explora ideas de tus compañeros en este espacio creado por estudiantes del ITESO.</p>
-      <img src="bienvenida.jpg" alt="Colaboración estudiantil">
-    </section>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
 
-    <!-- Anuncios -->
-    <section class="announcements">
-      <h2>Anuncios Relevantes del ITESO y la Carrera</h2>
-      <div class="announcement">
-        <h3>Hackathon ITESO 2024</h3>
-        <p>Prepárate para el evento más esperado. Regístrate antes del 10 de diciembre.</p>
-        <a href="#">Leer más</a>
-      </div>
-      <div class="announcement">
-        <h3>Taller de Robótica</h3>
-        <p>Aprende los fundamentos de robótica aplicada. Inscripciones abiertas hasta el 5 de enero.</p>
-        <a href="#">Leer más</a>
-      </div>
-    </section>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    <!-- Búsqueda de Proyectos -->
-    <section class="project-search">
-      <h2>Encuentra Proyectos</h2>
-      <form>
-        <input type="text" placeholder="Busca por palabras clave">
-        <select>
-          <option value="all">Todas las categorías</option>
-          <option value="programming">Programación</option>
-          <option value="robotics">Robótica</option>
-          <option value="design">Diseño</option>
-        </select>
-        <button type="submit">Buscar</button>
-      </form>
-    </section>
-  </main>
+      body {
+        background: whitesmoke;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
 
-  <footer>
-    <p>&copy; 2024 SystemStep. Creado por estudiantes del ITESO.</p>
-  </footer>
-</body>
+      .blob {
+        position: absolute;
+        opacity: 0.9; /* Aumenta opacidad */
+        width: 300px;
+        aspect-ratio: 1/1;
+        animation: animate 12s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite alternate forwards;
+        filter: blur(40px); /* Reduce blur */
+        z-index: -1;
+        background: linear-gradient(
+          47deg,
+          #787cfe 21%,
+          #00a9f2 67%,
+          #172d9d 61%
+        );
+      }
+
+      /* Posiciones de los blobs */
+      .blob:nth-child(1) {
+        top: 5%;
+        left: 10%;
+        animation-duration: 8s;
+      }
+
+      .blob:nth-child(2) {
+        top: 50%;
+        left: 30%;
+        animation-duration: 12s;
+      }
+
+      .blob:nth-child(3) {
+        top: 80%;
+        left: 70%;
+        animation-duration: 9s;
+      }
+
+      .blob:nth-child(4) {
+        top: 25%;
+        left: 80%;
+        animation-duration: 11s;
+      }
+
+      .blob:nth-child(5) {
+        top: 90%;
+        left: 5%; /* Cubre esquina inferior izquierda */
+        animation-duration: 10s;
+      }
+
+      /* Más movimiento */
+      @keyframes animate {
+        0% {
+          translate: 0 0;
+          border-radius: 60% 40% 30% 70% / 100% 85% 92% 74%;
+        }
+        50% {
+          translate: 30% -40%; /* Más movimiento */
+          border-radius: 20% 71% 47% 70% / 81% 15% 22% 54%;
+          rotate: 41deg;
+          scale: 1.3; /* Tamaño más grande temporalmente */
+        }
+        100% {
+          translate: -40% 30%; /* Más movimiento */
+          border-radius: 100% 75% 92% 74% / 60% 80% 30% 70%;
+          rotate: -60deg;
+          scale: 1.15;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Varias blobs animadas -->
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
