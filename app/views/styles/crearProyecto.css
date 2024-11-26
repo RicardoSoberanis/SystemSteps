@@ -121,3 +121,21 @@ body {
     background-color: #333;
     color: #fff;
 }
+
+#projectTitle {
+    font-family: "Montserrat", sans-serif;
+    font-size: xx-large;
+    font-optical-sizing: auto;
+    font-style: normal;
+    border: none;
+    background-color: transparent;
+    backdrop-filter: blur(15px);
+    width: 450px;
+    height: 60px;
+    padding-left: 20px;
+}
+
+#projectTitle:focus {
+    outline: none;
+    border-color: transparent;
+}

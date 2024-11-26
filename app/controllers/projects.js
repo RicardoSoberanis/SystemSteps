@@ -1,15 +1,23 @@
 const Project = require('../models/projectModel');
 
-// Crear un nuevo proyecto
 const addProject = async (projectData) => {
     try {
+        // Verificar si ya existe un proyecto con el mismo título y usuario
+        const existingProject = await Project.findOne({ title: projectData.title, userId: projectData.userId });
+        if (existingProject) {
+            const error = new Error('Ya existe un proyecto con este título. Por favor, elige otro título.');
+            error.status = 405; // Error de cliente
+            throw error;
+        }
+
+        // Crear el nuevo proyecto si no hay duplicados
         const newProject = new Project(projectData);
         const savedProject = await newProject.save();
         console.log('Proyecto creado:', savedProject);
         return savedProject;
     } catch (error) {
-        console.error('Error al crear proyecto:', error);
-        throw error;
+        console.error('Error al crear proyecto:', error.message);
+        throw error; // Propagar el error para que la ruta lo maneje
     }
 };
 

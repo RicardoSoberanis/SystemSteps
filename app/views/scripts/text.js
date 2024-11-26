@@ -80,49 +80,72 @@ function insertImage() {
 }
 
 async function guardarProyecto(event) {
-    event.preventDefault()
-    const contenido = editor.getValue();
-    const token = localStorage.getItem('token');
+    event.preventDefault();
 
+    const contenido = editor.getValue();
+    const titulo = document.getElementById("projectTitle").value.trim();
+    const token = localStorage.getItem("token");
+
+    // Verificar si hay título
+    if (!titulo) {
+        const titleModal = new bootstrap.Modal(document.getElementById("titleModal"));
+        titleModal.show();
+        return;
+    }
+
+    // Verificar si hay token
     if (!token) {
-        alert('Debes iniciar sesión para guardar proyectos');
-        const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        alert("Debes iniciar sesión para guardar proyectos");
+        const loginModal = new bootstrap.Modal(document.getElementById("loginModal"));
         loginModal.show();
         return;
     }
 
     try {
-        const response = await fetch('http://localhost:3000/projectsHandler', {
-            method: 'POST',
+        const response = await fetch("http://localhost:3000/projectsHandler", {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({ content: contenido, title: 'Mi Proyecto' }),
+            body: JSON.stringify({ content: contenido, title: titulo }),
         });
 
         if (!response.ok) {
             const errorData = await response.json();
             if (response.status === 401) {
-                alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
-                localStorage.removeItem('token');
-                const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                alert("Tu sesión ha expirado. Por favor, inicia sesión nuevamente.");
+                localStorage.removeItem("token");
+                const loginModal = new bootstrap.Modal(document.getElementById("loginModal"));
                 loginModal.show();
+            } else if (response.status === 405) {
+                const titleModalLabel = document.getElementById("titleModalLabel");
+                titleModalLabel.textContent = "Título duplicado";
+                const titleModal = new bootstrap.Modal(document.getElementById("titleModal"));
+                titleModal.show();
+                return;
             } else {
-                alert(errorData.message || 'Error al guardar el proyecto');
+                alert(errorData.error || "Error al guardar el proyecto");
             }
             return;
         }
 
-        if (response.ok) {
-            alert('Proyecto guardado exitosamente');
-        } else {
-            const data = await response.json();
-            alert(data.message || 'Error al guardar el proyecto');
-        }
+        alert("Proyecto guardado exitosamente");
     } catch (error) {
-        console.error('Error:', error);
-        alert('Error al guardar el proyecto');
+        console.error("Error:", error);
+        alert("Error al guardar el proyecto");
+    }
+}
+
+function setTitleAndSave(event) {
+    event.preventDefault();
+    const modalTitleInput = document.getElementById("modalProjectTitle").value.trim();
+    if (modalTitleInput) {
+        document.getElementById("projectTitle").value = modalTitleInput; // Actualiza el título principal
+        bootstrap.Modal.getInstance(document.getElementById("titleModal")).hide(); // Cierra el modal
+        guardarProyecto(new Event("submit")); // Llama nuevamente a guardarProyecto
+    } else {
+        alert("Por favor, introduce un título antes de guardar.");
     }
 }
 

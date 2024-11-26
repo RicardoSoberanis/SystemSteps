@@ -330,7 +330,70 @@ This is the **complete step-by-step breakdown** of the program.
 
 
 
+<div class="header tittle">
+        <input id="projectTitle" type="text" class="text-custom" placeholder="Titulo del proyecto">
+        <div>
+            <button class="btn btn-outline-info me-2" data-bs-toggle="modal" data-bs-target="#helpModal">
+                <i class="bi bi-question-circle"></i> Ayuda
+            </button>
+            <button class="btn btn-primary save-btn" onclick="guardarProyecto(event)">
+                <i class="bi bi-save"></i> Guardar Proyecto
+            </button>
+        </div>
+    </div>
+agregue este input
 
+ahora quiero que cuando apretemos el boton de guardar proyecto, cheque si se puso un titulo, si no lo hay debe de abrise un modal para poner el titulo.
+
+
+tambien debemos modificar la parte en la que le pasamos el titulo hardcodeado a la ruta y utilizarel titulo nuestro
+
+async function guardarProyecto(event) {
+    event.preventDefault()
+    const contenido = editor.getValue();
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        alert('Debes iniciar sesión para guardar proyectos');
+        const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        loginModal.show();
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:3000/projectsHandler', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: Bearer ${token},
+            },
+            body: JSON.stringify({ content: contenido, title: 'Mi Proyecto' }),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            if (response.status === 401) {
+                alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
+                localStorage.removeItem('token');
+                const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                loginModal.show();
+            } else {
+                alert(errorData.message || 'Error al guardar el proyecto');
+            }
+            return;
+        }
+
+        if (response.ok) {
+            alert('Proyecto guardado exitosamente');
+        } else {
+            const data = await response.json();
+            alert(data.message || 'Error al guardar el proyecto');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al guardar el proyecto');
+    }
+}
 
 
 

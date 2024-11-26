@@ -16,7 +16,12 @@ router.post('/', authenticateToken, async (req, res) => {
         const newProject = await addProject(projectData);
         res.status(201).json(newProject);
     } catch (error) {
-        res.status(500).json({ error: 'Error al crear el proyecto' });
+        const statusCode = error.status || 500;
+        const errorMessage = error.status === 405 
+            ? 'Titulo duplicado. Cambie el titulo' 
+            : 'Error al crear el proyecto';
+        
+        res.status(statusCode).json({ error: errorMessage });
     }
 });
 

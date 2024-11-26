@@ -20,6 +20,7 @@
             background-size: cover; 
             background-position: center; 
             background-repeat: no-repeat; 
+            height: max-content;
         }
 
         .navbar {
@@ -90,7 +91,7 @@
         }
 
         .header {
-            margin-top: 40px;
+            margin-top: 60px;
         }
     </style>
 </head>
@@ -140,7 +141,7 @@
     </header>
 
     <div class="header tittle">
-        <h2 class="text-custom">Editor de Markdown</h2>
+        <input id="projectTitle" type="text" class="text-custom" placeholder="Titulo del proyecto">
         <div>
             <button class="btn btn-outline-info me-2" data-bs-toggle="modal" data-bs-target="#helpModal">
                 <i class="bi bi-question-circle"></i> Ayuda
@@ -234,6 +235,25 @@ Bloque de código
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="titleModal" tabindex="-1" aria-labelledby="titleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleModalLabel">Falta el título</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Por favor, introduce un título para tu proyecto:</p>
+                    <input id="modalProjectTitle" type="text" class="form-control" placeholder="Título del proyecto" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="setTitleAndSave(event)">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>    
 
     <!-- Modal: Login -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
