@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const userController = require('../controllers/users');
 
-const SECRET_KEY = 'tu_clave_secreta';
+const SECRET_KEY = process.env.SECRET_KEY;
 
 router.post('/check-email', async (req, res) => {
     console.log('entro a la ruta')
@@ -29,9 +29,11 @@ router.post('/check-email', async (req, res) => {
 // Registro de usuario
 router.post('/register', async (req, res) => {
     const { name, email, password, carrera, edad, usuario } = req.body;
-
+    console.log("En register"+password)
     try {
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = password;
+
+        console.log("hashedpasss-->"+hashedPassword)
         const newUser = new User({ name, email, password: hashedPassword, carrera, edad, usuario });
         const savedUser = await newUser.save();
 
@@ -62,8 +64,12 @@ router.post('/login', async (req, res) => {
         if (!user) {
             return res.status(404).json({ success: false, message: 'Usuario no encontrado' });
         }
+        console.log('-----')
+        console.log(password)
+        console.log(user.password)
 
         const isMatch = await bcrypt.compare(password, user.password);
+
         if (!isMatch) {
             return res.status(401).json({ success: false, message: 'Contraseña incorrecta' });
         }
@@ -81,6 +87,7 @@ router.post('/login', async (req, res) => {
             },
         });
     } catch (error) {
+        console.log('Error en el login:', error.message);
         res.status(500).json({ success: false, message: error.message });
     }
 });

@@ -71,6 +71,7 @@ async function completeRegistration(event) {
             body: JSON.stringify({ email: tempEmail, password: tempPassword, usuario, name, edad, carrera }),
         });
 
+        console.log(tempPassword)
         const data = await response.json();
         if (data.success) {
             localStorage.setItem('token', data.token); // Guarda el token en localStorage
@@ -86,9 +87,12 @@ async function completeRegistration(event) {
 }
 
 // Función para iniciar sesión
-async function loginUser() {
-    const email = document.getElementById('email').value;
+async function loginUser(event) {
+    event.preventDefault(); // Evita que se recargue la página
+
+    const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
+    console.log(password)
 
     try {
         const response = await fetch('http://localhost:3000/auth/login', {

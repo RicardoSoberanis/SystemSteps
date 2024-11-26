@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoConnection = "mongodb+srv://Admin:KoKi190804@myapp.ong23.mongodb.net/MyAppDB";
+const mongoConnection = process.env.MONGO_URI;
 
 const connectToDatabase = async () => {
     try {

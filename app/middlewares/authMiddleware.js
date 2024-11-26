@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const SECRET_KEY = 'tu_clave_secreta_super_segura'; // Cambiar por una clave segura
+const SECRET_KEY = process.env.SECRET_KEY; // Cambiar por una clave segura
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers.authorization;
