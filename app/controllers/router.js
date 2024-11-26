@@ -2,20 +2,20 @@ const express = require("express");
 const path = require('path');
 const userRouter = require('../routes/users');
 const projectRouter = require('../routes/projects');
-const newsRouter = require('../routes/news')
+const newsRouter = require('../routes/news');
+const connectToDatabase = require('../db/db');
+const authRouter = require('../routes/auth');
+const authenticateToken = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
-function validateAdmin(req, res, next) {
-    const authHeader = req.headers['x-auth'];
-    if (authHeader !== 'admin') {
-        return res.status(403).json({ error: 'Acceso no autorizado, no se cuenta con privilegios de administrador' });
-    }
-    next();
-}
+router.use(express.json());
 
-router.use('/users', userRouter);
-router.use("/projects", projectRouter);
+connectToDatabase();
+
+router.use('/auth', authRouter);
+router.use('/users', authenticateToken ,userRouter);
+router.use("/projects", authenticateToken, projectRouter);
 router.use('/news', newsRouter);
 
 router.get('/', (req, res) => {

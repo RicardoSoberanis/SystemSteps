@@ -80,11 +80,37 @@ function insertImage() {
 }
 
 // Función para guardar el proyecto
-function guardarProyecto() {
+async function guardarProyecto() {
     const contenido = editor.getValue();
-    localStorage.setItem('markdown-content', contenido);
-    alert('Proyecto guardado exitosamente');
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        alert('Debes iniciar sesión para guardar proyectos');
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:3000/projects', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ content: contenido, title: 'Mi Proyecto' }),
+        });
+
+        if (response.ok) {
+            alert('Proyecto guardado exitosamente');
+        } else {
+            const data = await response.json();
+            alert(data.message || 'Error al guardar el proyecto');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al guardar el proyecto');
+    }
 }
+
 
 // Cargar contenido guardado si existe
 const contenidoGuardado = localStorage.getItem('markdown-content');
