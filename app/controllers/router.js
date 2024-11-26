@@ -15,7 +15,7 @@ connectToDatabase();
 
 router.use('/auth', authRouter);
 router.use('/users', authenticateToken ,userRouter);
-router.use("/projects", authenticateToken, projectRouter);
+router.use('/projectsHandler', authenticateToken, projectRouter);
 router.use('/news', newsRouter);
 
 router.get('/', (req, res) => {
