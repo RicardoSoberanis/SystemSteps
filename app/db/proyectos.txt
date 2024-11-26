@@ -1,0 +1,563 @@
+
+
+
+  # *Step-by-Step Guide to the Assembly Calculator*
+
+## **Overview**
+This program implements a simple calculator in assembly, using a switch-like structure. It performs:
+- Addition
+- Subtraction
+- Multiplication
+- Default AND operation  
+The operation is determined by the value of the s0 register (selector), and the result is stored in s3.
+
+---
+
+## **1. Initialization**
+### *Registers and Variables*
+- **s0**: Selector, controls which operation to perform (initialized to 2).
+- **s1**: First operand (a), initialized to 5.
+- **s2**: Second operand (b), initialized to 3.
+- **s3**: Stores the result (c), initialized to 0.
+- **Temporary Registers (t1, t2, t3):**
+  - t1 = 1 → Addition  
+  - t2 = 2 → Subtraction  
+  - t3 = 3 → Multiplication  
+
+---
+
+## **2. Control Flow**
+### *Switch Simulation*
+- The program uses beq and beqz to branch to the appropriate operation:
+  - *Addition*: If s0 == 1, jump to suma.
+  - *Subtraction*: If s0 == 2, jump to resta.
+  - *Multiplication*: If s0 == 3, jump to multiplicacion.
+  - *Default Operation*: If s0 == 0, jump to default.
+
+---
+
+## **3. Operations**
+### *Addition*
+asm
+suma:
+    addi s3, zero, 0     # Reset s3 to 0
+    add s3, s1, s2       # s3 = s1 + s2
+    jal final            # Jump to final
+    
+    
+### *Subtraction*
+```
+asm
+resta:
+    addi s3, zero, 0     # Reset s3 to 0
+    sub s3, s1, s2       # s3 = s1 - s2
+    jal final            # Jump to final
+  ```
+ 
+### *Multiplication*
+```
+asm
+multiplicacion:
+    addi s3, zero, 0     # Reset s3 to 0
+    mul s3, s1, s2       # s3 = s1 * s2
+    jal final            # Jump to final
+```
+
+
+### *Default (AND operation)*
+```
+asm
+default:
+    addi s3, zero, 0     # Reset s3 to 0
+    and s3, s1, s2       # s3 = s1 AND s2
+    jal final            # Jump to final
+```
+
+  
+---
+ 
+
+
+
+## **4. Ending the Program**
+### *Final Label*
+The program ends at the `final` label with a `nop` (no operation) instruction.
+
+```asm
+final:
+    nop                 # No operation (end of the program)
+```
+---
+## **5. Execution Flow Example**
+### **Example Scenario**
+1. **Initial Values:**
+   - `s0 = 2` (selector).
+   - `s1 = 5` (first operand).
+   - `s2 = 3` (second operand).
+
+2. **Switch-like Execution:**
+   - The program checks the value of `s0`:
+     - If `s0 == 1`: Jumps to `suma` (addition).
+     - If `s0 == 2`: Jumps to `resta` (subtraction).
+     - If `s0 == 3`: Jumps to `multiplicacion` (multiplication).
+     - If `s0 == 0`: Jumps to `default` (AND operation).
+   - Since `s0 == 2`, the program jumps to the `resta` label.
+
+3. **Subtraction Operation:**
+   - Executes the subtraction:
+     ```asm
+     sub s3, s1, s2       # s3 = s1 - s2
+     ```
+   - Calculates `s3 = 5 - 3 = 2`.
+
+4. **Result:**
+   - The result of the operation (`2`) is stored in `s3`.
+
+5. **Program End:**
+   - After performing the operation, the program jumps to the `final` label:
+     ```asm
+     jal final
+     ```
+   - Execution stops with a `nop` instruction in the `final` label.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Here’s the **step-by-step guide** for the provided Python code:
+
+---
+
+### **1. Introduction and Welcome Message**
+- The program starts by printing a welcome message to the user:
+  ```python
+  print("Bienvenido al programa")
+  ```
+
+---
+
+### **2. User Input**
+- The user is prompted to input three integer values:
+  - `num1`: First value.
+  - `num2`: Second value.
+  - `num3`: Third value.
+  
+  The program then stores these values for processing:
+  ```python
+  num1 = int(input("Ingrese el primer valor "))
+  num2 = int(input("Ingrese el segundo valor "))
+  num3 = int(input("Ingrese el tercer valor "))
+  ```
+
+---
+
+### **3. Determine the Largest Number**
+- The function `mayor_valor` is called to determine the largest of the three numbers:
+  ```python
+  resultado = mayor_valor(num1, num2, num3, resultado)
+  ```
+- The `mayor_valor` function compares the three numbers using conditional checks and prints the largest number. It also returns the largest value to the `resultado` variable:
+  ```python
+  if num1 < num2 < num3 or num2 < num1 < num3:
+      print(num3, " es el valor mas grande")
+      resultado = num3
+  elif num1 > num2 > num3 or num1 > num3 > num2:
+      print(num1, " es el valor mas grande")
+      resultado = num1
+  elif num2 > num3 > num1 or num2 > num1 > num3:
+      print(num2, " es el valor mas grande")
+      resultado = num2
+  return resultado
+  ```
+
+---
+
+### **4. Check If the Largest Number is Even or Odd**
+- After determining the largest number (`resultado`), the program checks if it's even or odd:
+  ```python
+  if resultado % 2 == 0:
+      multiplicar_par(resultado)
+  else:
+      multiplicar_impar(resultado)
+  ```
+
+- **If even**, the program calls the `multiplicar_par` function to print the multiplication table for even numbers (from 0 to 10):
+  ```python
+  def multiplicar_par(resultado):
+      for numero in range(11):
+          print(f"El resultado de multiplicar {resultado} * {numero} es:{numero * resultado}")
+  ```
+
+- **If odd**, the program calls the `multiplicar_impar` function to print the multiplication table for odd numbers (from 0 to 5):
+  ```python
+  def multiplicar_impar(resultado):
+      for numero in range(6):
+          print(f"El resultado de multiplicar {resultado} * {numero} es:{numero * resultado}")
+  ```
+
+---
+
+### **5. Repeat the Process**
+- After completing the multiplication, the program asks if the user wants to repeat the process:
+  ```python
+  print("Desea realizar el proceso nuevamente?")
+  respuesta = input().lower()
+  ```
+
+- The program checks the response:
+  - If the user types `"si"`, the program restarts the entire process.
+  - If the user types `"no"`, the program stops.
+  - If the response is invalid, the program asks again:
+    ```python
+    if respuesta == "si":
+        codigo = True
+        acc = False
+    elif respuesta == "no":
+        codigo = False
+        acc = False
+        break
+    else:
+        print("Opcion no valida")
+    ```
+
+---
+
+### **6. Program Flow Example**
+1. **Initial Values**:
+   - `num1 = 3`
+   - `num2 = 5`
+   - `num3 = 7`
+
+2. **Largest Value Determined**:
+   - The largest number is `7`.
+
+3. **Even or Odd Check**:
+   - Since `7` is odd, the `multiplicar_impar` function is called.
+
+4. **Multiplication Output** (for odd number `7`):
+   ```
+   El resultado de multiplicar 7 * 0 es: 0
+   El resultado de multiplicar 7 * 1 es: 7
+   El resultado de multiplicar 7 * 2 es: 14
+   El resultado de multiplicar 7 * 3 es: 21
+   El resultado de multiplicar 7 * 4 es: 28
+   El resultado de multiplicar 7 * 5 es: 35
+   ```
+
+5. **Repeat Prompt**:
+   - User is asked if they want to repeat the process.
+
+---
+
+### **7. End of Program**
+- The program ends if the user types `"no"` when asked if they want to repeat. If the user types `"si"`, it restarts the process.
+
+---
+
+This is the **complete step-by-step breakdown** of the program.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Certainly! Here's a **step-by-step walkthrough** of how each function is executed, with code snippets showing their role in the workflow. This will help you understand how the program works as it progresses through its stages.
+
+---
+
+### **Step 1: Initialize the Grid**
+The program begins by creating a 50x50 grid filled with `'#'` characters, representing dead cells.
+
+#### Code:
+```c
+crear_tabla(tabla);
+mostrar_tabla(tabla);
+```
+
+#### Function: `crear_tabla`
+```c
+void crear_tabla(char lista[50][50]) {
+    for (int i = 0; i < 50; i++) {
+        for (int j = 0; j < 50; j++) {
+            lista[i][j] = '#'; // Fill with dead cells
+        }
+    }
+}
+```
+
+This sets up the grid for the simulation. For example, the grid might look like this:
+```
+# # # # # ...
+# # # # # ...
+...
+```
+
+---
+
+### **Step 2: Place Live Cells**
+The user is prompted to place live cells (`'X'`) on the grid interactively. The `poner_vida` function handles this.
+
+#### Code:
+```c
+while (stop[0] == 0) {
+    poner_vida(tabla, stop);
+}
+```
+
+#### Function: `poner_vida`
+```c
+void poner_vida(char lista[50][50], int stop[1]) {
+    printf("Enter -1 for both row and column to stop placing cells.\n");
+    int x, y;
+
+    // Loop until valid input or stop condition
+    while (1) {
+        printf("Select row: ");
+        scanf("%d", &x);
+        if (x == -1) break;
+
+        printf("Select column: ");
+        scanf("%d", &y);
+        if (y == -1) break;
+
+        // Place live cell if position is valid
+        if (x > 0 && x <= 50 && y > 0 && y <= 50 && lista[x-1][y-1] == '#') {
+            lista[x-1][y-1] = 'X';
+        } else {
+            printf("Invalid position or already occupied. Try again.\n");
+        }
+
+        mostrar_tabla(lista); // Show updated grid
+    }
+
+    stop[0] = 1; // Stop placing cells
+}
+```
+
+---
+
+### **Step 3: Start Simulation**
+The simulation begins with the user controlling when to proceed to the next generation. A `while` loop checks user input for advancing or stopping the game.
+
+#### Code:
+```c
+printf("Press 'n' for next generation, 'e' to end the simulation.\n");
+while (game == 0) {
+    next = get_char("> ");
+    if (next == 'n') {
+        reglas(tabla);
+        mostrar_tabla(tabla);
+    } else if (next == 'e') {
+        game = 1;
+    }
+}
+```
+
+---
+
+### **Step 4: Apply Game Rules**
+The `reglas` function applies Conway's rules for each generation by creating a temporary copy of the grid and updating cells accordingly.
+
+#### Function: `reglas`
+```c
+void reglas(char lista[50][50]) {
+    char copia[50][50];
+    crear_copia(copia); // Initialize with '='
+
+    for (int y = 0; y < 50; y++) {
+        for (int x = 0; x < 50; x++) {
+            int neighbors = revisar_tabla(lista, x, y);
+
+            // Apply Conway's rules
+            if (lista[x][y] == 'X' && (neighbors < 2 || neighbors > 3)) {
+                copia[x][y] = '#'; // Cell dies
+            } else if (lista[x][y] == '#' && neighbors == 3) {
+                copia[x][y] = 'X'; // Cell comes to life
+            } else {
+                copia[x][y] = lista[x][y]; // Retain state
+            }
+        }
+    }
+
+    copiar_tabla(copia, lista); // Copy changes to the main grid
+}
+```
+
+---
+
+### **Step 5: Display Updated Grid**
+The `mostrar_tabla` function displays the grid at every step, showing the current state of the game.
+
+#### Function: `mostrar_tabla`
+```c
+void mostrar_tabla(char lista[50][50]) {
+    for (int i = 0; i < 50; i++) {
+        for (int j = 0; j < 50; j++) {
+            printf("%c ", lista[i][j]);
+        }
+        printf("\n");
+    }
+}
+```
+
+---
+
+### **Step 6: End the Simulation**
+The simulation ends when the user inputs `'e'`. The loop breaks, and the program exits.
+
+#### Code:
+```c
+if (next == 'e') {
+    game = 1;
+    printf("Simulation ended.\n");
+}
+```
+
+---
+
+### Example Walkthrough
+
+1. **Initialize Grid**:
+   ```
+   # # # # # # ...
+   # # # # # # ...
+   ...
+   ```
+
+2. **Place Live Cells**:
+   ```
+   User inputs:
+   Row: 10, Column: 10
+   Row: 11, Column: 10
+   Row: 12, Column: 10
+
+   Grid:
+   # # # # # # ...
+   # # # # # # ...
+   # # # # X # ...
+   # # # # X # ...
+   # # # # X # ...
+   ```
+
+3. **Simulate**:
+   - Apply `reglas`:
+     - Cells evolve according to Conway's rules.
+   - Display updated grid.
+
+4. **Repeat or Exit**:
+   - User presses `'n'` to continue or `'e'` to end.
+
+This implementation shows how the code logically evolves from initialization to simulation and finally termination.
+
+
+
+
