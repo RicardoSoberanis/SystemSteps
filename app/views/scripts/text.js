@@ -79,18 +79,20 @@ function insertImage() {
     fileInput.value = '';
 }
 
-// Función para guardar el proyecto
-async function guardarProyecto() {
+async function guardarProyecto(event) {
+    event.preventDefault()
     const contenido = editor.getValue();
     const token = localStorage.getItem('token');
 
     if (!token) {
         alert('Debes iniciar sesión para guardar proyectos');
+        const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        loginModal.show();
         return;
     }
 
     try {
-        const response = await fetch('http://localhost:3000/projects', {
+        const response = await fetch('http://localhost:3000/projectsHandler', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -98,6 +100,19 @@ async function guardarProyecto() {
             },
             body: JSON.stringify({ content: contenido, title: 'Mi Proyecto' }),
         });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            if (response.status === 401) {
+                alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
+                localStorage.removeItem('token');
+                const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                loginModal.show();
+            } else {
+                alert(errorData.message || 'Error al guardar el proyecto');
+            }
+            return;
+        }
 
         if (response.ok) {
             alert('Proyecto guardado exitosamente');
@@ -110,7 +125,6 @@ async function guardarProyecto() {
         alert('Error al guardar el proyecto');
     }
 }
-
 
 // Cargar contenido guardado si existe
 const contenidoGuardado = localStorage.getItem('markdown-content');

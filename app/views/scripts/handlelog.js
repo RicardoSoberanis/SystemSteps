@@ -42,12 +42,20 @@ async function checkEmail(event) {
 
         const data = await response.json(); // Convierte la respuesta en JSON
         if (data.success) {
-            // Si el email está disponible, abre el segundo modal
+            // Cerrar el modal actual
             const registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
-            registerModal.hide();
+            if (registerModal) {
+                registerModal.hide();
+            }
 
-            const registerInfoModal = new bootstrap.Modal(document.getElementById('registerInfoModal'));
-            registerInfoModal.show();
+            // Abrir el siguiente modal
+            const registerInfoModalElement = document.getElementById('registerInfoModal');
+            if (registerInfoModalElement) {
+                const registerInfoModal = new bootstrap.Modal(registerInfoModalElement);
+                registerInfoModal.show();
+            } else {
+                console.error('El modal registerInfoModal no existe en el DOM.');
+            }
         }
     } catch (error) {
         console.error('Error:', error);
@@ -55,7 +63,6 @@ async function checkEmail(event) {
     }
 }
 
-// Función para completar el registro
 async function completeRegistration(event) {
     event.preventDefault(); // Evita que se recargue la página
 
@@ -71,12 +78,14 @@ async function completeRegistration(event) {
             body: JSON.stringify({ email: tempEmail, password: tempPassword, usuario, name, edad, carrera }),
         });
 
-        console.log(tempPassword)
         const data = await response.json();
         if (data.success) {
             localStorage.setItem('token', data.token); // Guarda el token en localStorage
             alert('Registro completado exitosamente. Ahora estás logueado.');
-            window.location.href = '/home'; // Redirige al home
+
+            // Cerrar modal de registro
+            const registerInfoModal = bootstrap.Modal.getInstance(document.getElementById('registerInfoModal'));
+            registerInfoModal.hide();
         } else {
             alert(data.message);
         }
@@ -86,13 +95,11 @@ async function completeRegistration(event) {
     }
 }
 
-// Función para iniciar sesión
 async function loginUser(event) {
-    event.preventDefault(); // Evita que se recargue la página
+    event.preventDefault();
 
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
-    console.log(password)
 
     try {
         const response = await fetch('http://localhost:3000/auth/login', {
@@ -105,7 +112,10 @@ async function loginUser(event) {
         if (data.success) {
             localStorage.setItem('token', data.token); // Guarda el token en localStorage
             alert('Inicio de sesión exitoso');
-            window.location.href = '/home'; // Redirige al home
+
+            // Cerrar modal de inicio de sesión
+            const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+            loginModal.hide();
         } else {
             alert(data.message);
         }

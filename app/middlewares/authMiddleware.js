@@ -8,13 +8,20 @@ const authenticateToken = (req, res, next) => {
     }
 
     const token = authHeader.split(' ')[1];
+    if (!token) {
+        return res.status(401).json({ message: 'Token no proporcionado o mal formateado' });
+    }
     try {
         const decoded = jwt.verify(token, SECRET_KEY);
-        req.user = decoded; // Almacena la información del usuario autenticado
+        req.user = decoded;
         next();
     } catch (error) {
-        res.status(403).json({ message: 'Token inválido o expirado' });
-    }
+        const message =
+            error.name === 'TokenExpiredError'
+                ? 'El token ha expirado, por favor inicia sesión nuevamente'
+                : 'Token inválido';
+        res.status(403).json({ message });
+    }    
 };
 
 module.exports = authenticateToken;
