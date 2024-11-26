@@ -15,6 +15,13 @@
         rel="stylesheet">
     <link rel="stylesheet" href="styles/crearProyecto.css">
     <style>
+        body {
+            background-image: url('./img/ultrawide-blue-6400x2880-19825.png');
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+        }
+
         .navbar {
             margin-top: 5px;
             padding: 0.5rem 1rem;
@@ -67,115 +74,6 @@
             background-color: transparent;
         }
 
-        .carousel-section {
-            padding: 2rem 0;
-            max-width: 800px; 
-            margin: 0 auto;
-        }
-
-        .carousel-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            color: #00a9f2;
-        }
-
-        .carousel {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .image-container {
-            position: relative;
-            width: 100%;
-            height: 400px;  /* Altura fija para todas las imágenes */
-            overflow: hidden;
-        }
-
-        .image-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(255, 255, 255, 0) 30%,
-                rgba(255, 255, 255, 0.8) 100%
-            );
-            pointer-events: none;
-        }
-
-        .carousel-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        /* Estilos para los indicadores */
-        .carousel-indicators {
-            bottom: -40px;
-        }
-
-        .carousel-indicators li {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin: 0 5px;
-            background-color: #00a9f2;
-            opacity: 0.5;
-        }
-
-        .carousel-indicators .active {
-            opacity: 1;
-        }
-
-        .carousel-control-prev,
-        .carousel-control-next {
-            width: 40px;
-            height: 40px;
-            background-color: #00a9f2;
-            border-radius: 50%;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .carousel:hover .carousel-control-prev,
-        .carousel:hover .carousel-control-next {
-            opacity: 1;
-        }
-
-        .carousel-control-prev {
-            left: 20px;
-        }
-
-        .carousel-control-next {
-            right: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .image-container {
-                height: 300px;
-            }
-            
-            .carousel-section {
-                padding: 1rem;
-            }
-            
-            .carousel-control-prev,
-            .carousel-control-next {
-                width: 30px;
-                height: 30px;
-            }
-        }
-
 
         .modal-content {
             font-family: "Montserrat", sans-serif;
@@ -205,18 +103,18 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="navbar-brand d-none d-lg-block" href="http://localhost:3000/home">
-                    <img src="img/logoss_black.png" alt="Logo" height="44" class="d-inline-block align-text-top">
+                    <img src="img/logoss_white.png" alt="Logo" height="44" class="d-inline-block align-text-top">
                 </a>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="http://localhost:3000/projects">PROJECTS</a>
+                            <a class="nav-link text-custom" href="http://localhost:3000/projects">PROJECTS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="http://localhost:3000/create-project">CREATE</a>
+                            <a class="nav-link text-custom" href="http://localhost:3000/create-project">CREATE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="http://localhost:3000/aboutus">ABOUT US</a>
+                            <a class="nav-link text-custom" href="http://localhost:3000/aboutus">ABOUT US</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto d-flex align-items-center">
@@ -242,7 +140,7 @@
     </header>
 
     <div class="header tittle">
-        <h2>Editor de Markdown</h2>
+        <h2 class="text-custom">Editor de Markdown</h2>
         <div>
             <button class="btn btn-outline-info me-2" data-bs-toggle="modal" data-bs-target="#helpModal">
                 <i class="bi bi-question-circle"></i> Ayuda
@@ -471,6 +369,11 @@ Bloque de código
             </div>
         </div>
     </div>
+
+    <footer class="text-center">
+        <br><br>
+        <p>&copy; 2024 SystemStep. Creado por estudiantes del ITESO.</p>
+    </footer>
 
     <script src="./styles/navbar.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
