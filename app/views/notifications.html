@@ -150,7 +150,10 @@
     <style>
          body {
                 font-family: "Montserrat", sans-serif;
-                background-color: #787cfe;
+                background-image: url('./img/samsung-galaxy-s11-blue-stock-bubble-gradients-3040x3040-1705.jpg');
+                background-size: cover; 
+                background-position: center; 
+                background-repeat: no-repeat; 
             }
 
             .card {
@@ -167,15 +170,13 @@
             }
 
             .navbar {
+                font-family: "Montserrat", sans-serif;
                 margin-top: 5px;
                 padding: 0.5rem 1rem;
                 position: fixed;
                 width: 100%;
                 top: 0;
                 z-index: 1050;
-                font-family: "Montserrat", sans-serif;
-                font-optical-sizing: auto;
-                font-style: normal;
             }
 
             .navbar.scrolled {
@@ -184,20 +185,13 @@
                 border-radius: 50px;
             }
 
-            @media (max-width: 991px) {
-                .navbar-brand {
-                    position: relative;
-                    left: 0;
-                    transform: none;
-                }
-            }
 
             .search-bar-custom{
                 border-radius: 20px;
                 background-color: rgba(255, 255, 255, 0.2);
                 backdrop-filter: blur(25px);
-                box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Sombra leve */
             }
+
             .container-notifications {
                 height: calc(100vh - 80px);
                 display: flex;
@@ -269,7 +263,7 @@
             }
 
             main {
-                padding-top: 76px; 
+                padding-top: 20px; 
             }
 
     </style>
@@ -282,16 +276,13 @@
             <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="http://localhost:3000/home">
-                        <img src="./img/logoss_black_iso.png" alt="Logo" height="44"
-                            class="d-inline-block align-text-top">
+                        <img src="./img/logoss_black_iso.png" alt="Logo" height="44" class="d-inline-block align-text-top">
                     </a>
-
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                        aria-label="Toggle navigation">
+            
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
+            
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
@@ -304,28 +295,34 @@
                                 <a class="nav-link" href="http://localhost:3000/aboutus">ABOUT US</a>
                             </li>
                         </ul>
+            
                         <!-- Barra de búsqueda -->
                         <form class="d-flex ms-auto" role="search">
-                            <input class="form-control me-2 search-bar-custom" type="search" placeholder="Search"
-                                aria-label="Search">
+                            <input class="form-control me-2 search-bar-custom" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-custom" type="submit">Search</button>
                         </form>
-
-                        <ul class="navbar-nav ms-auto">
+            
+                        <ul class="navbar-nav ms-auto d-flex align-items-center">
                             <li class="nav-item">
-                                <a class="nav-link" href="http://localhost:3000/profile" role="button">
-                                    <i class="fa-solid fa-user btn-acces" style="color: black; margin-right: 10px;"></i>
+                                <a class="nav-link" role="button" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                    <i class="nav-link" style="color: black; margin-right: 10px;">Log In</i>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost:3000/profile">
+                                    <i class="fa-solid fa-user" style="color: black; margin-right: 10px; margin-top: 5px;"></i>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="http://localhost:3000/notifications">
-                                    <i class="fa fa-bell"></i>
+                                    <i class="fa fa-bell" style="color: black; margin-right: 10px; margin-top: 5px;"></i>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
-            </nav>
+            </nav> 
         </header>
 
 
@@ -375,14 +372,9 @@
             </div>
         </main>
 
-        <footer>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <h2 class="col-6 mt-5 mb-2"
-                        style="text-align: center; text-transform: uppercase; letter-spacing: 10px;">contribuye</h2>
-                    <p style="text-align: center;">Compartiendo ganamos todos</p>
-                </div>
-            </div>
+        <footer class="text-center">
+            <br><br>
+            <p>&copy; 2024 SystemStep. Creado por estudiantes del ITESO.</p>
         </footer>
 
         <!-- Bootstrap JavaScript Libraries -->
