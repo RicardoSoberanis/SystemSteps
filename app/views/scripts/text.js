@@ -82,20 +82,37 @@ function insertImage() {
 async function guardarProyecto(event) {
     event.preventDefault();
 
-    const contenido = editor.getValue();
-    const titulo = document.getElementById("projectTitle").value.trim();
-    const token = localStorage.getItem("token");
+    // Recuperar el contenido del editor
+    const content = editor.getValue();
+
+    // Recuperar datos del proyecto desde el localStorage
+    const projectData = JSON.parse(localStorage.getItem('projectData'));
+    if (!projectData) {
+        alert("No se encontraron datos del proyecto en el almacenamiento local.");
+        return;
+    }
+
+    let { title, banner, category } = projectData;
+
+    title = document.getElementById('projectTitle').value.trim();
 
     // Verificar si hay título
-    if (!titulo) {
+    if (!title) {
         const titleModal = new bootstrap.Modal(document.getElementById("titleModal"));
         titleModal.show();
         return;
     }
 
+    // Verificar si hay categoría
+    if (!category) {
+        alert("Por favor, selecciona una categoría.");
+        return;
+    }
+
     // Verificar si hay token
+    const token = localStorage.getItem("token");
     if (!token) {
-        alert("Debes iniciar sesión para guardar proyectos");
+        alert("Debes iniciar sesión para guardar proyectos.");
         const loginModal = new bootstrap.Modal(document.getElementById("loginModal"));
         loginModal.show();
         return;
@@ -106,35 +123,24 @@ async function guardarProyecto(event) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
+                "Authorization": `Bearer ${token}`,
             },
-            body: JSON.stringify({ content: contenido, title: titulo }),
+            body: JSON.stringify({ content, title, banner, category }),
         });
-
+    
         if (!response.ok) {
             const errorData = await response.json();
-            if (response.status === 401) {
-                alert("Tu sesión ha expirado. Por favor, inicia sesión nuevamente.");
-                localStorage.removeItem("token");
-                const loginModal = new bootstrap.Modal(document.getElementById("loginModal"));
-                loginModal.show();
-            } else if (response.status === 405) {
-                const titleModalLabel = document.getElementById("titleModalLabel");
-                titleModalLabel.textContent = "Título duplicado";
-                const titleModal = new bootstrap.Modal(document.getElementById("titleModal"));
-                titleModal.show();
-                return;
-            } else {
-                alert(errorData.error || "Error al guardar el proyecto");
-            }
+            console.error("Error:", errorData);
+            alert(`Error: ${errorData.message || "No autorizado"}`);
             return;
         }
-
+    
         alert("Proyecto guardado exitosamente");
     } catch (error) {
-        console.error("Error:", error);
-        alert("Error al guardar el proyecto");
+        console.error("Error al guardar el proyecto:", error);
+        alert("Error en la conexión con el servidor.");
     }
+    
 }
 
 function setTitleAndSave(event) {
@@ -154,3 +160,47 @@ const contenidoGuardado = localStorage.getItem('markdown-content');
 if (contenidoGuardado) {
     editor.setValue(contenidoGuardado);
 }
+
+document.getElementById('crearProyecto').addEventListener('click', () => {
+    const modal = new bootstrap.Modal(document.getElementById('createProjectModal'));
+    modal.show();
+});
+
+document.getElementById('saveProjectBtn').addEventListener('click', () => {
+    const title = document.getElementById('projectTitleInput').value.trim();
+    const category = document.getElementById('projectCategoryInput').value;
+    const bannerFile = document.getElementById('projectBannerInput').files[0];
+
+    if (!title) {
+        alert('El título del proyecto es obligatorio.');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const bannerData = e.target.result;
+
+        const projectData = {
+            title,
+            category,
+            banner: bannerData
+        };
+
+        localStorage.setItem('projectData', JSON.stringify(projectData));
+
+        document.getElementById('projectTitle').value = title;
+
+        // Oculta el div de invitación y muestra los nuevos elementos
+        document.querySelector('.invitacion').style.display = 'none';
+        document.getElementById('canvitas').style.display = 'block'
+
+        const modal = bootstrap.Modal.getInstance(document.getElementById('createProjectModal'));
+        modal.hide();
+    };
+
+    if (bannerFile) {
+        reader.readAsDataURL(bannerFile);
+    } else {
+        reader.onload({ target: { result: '' } }); // Manejo para casos sin imagen
+    }
+});

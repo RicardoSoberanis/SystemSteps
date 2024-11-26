@@ -10,6 +10,8 @@ const {
 
 // Crear un proyecto
 router.post('/', authenticateToken, async (req, res) => {
+
+    console.log('si llega a la ruta')
     try {
         const projectData = req.body;
         projectData.userId = req.user.id; // Asigna el usuario autenticado como creador

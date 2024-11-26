@@ -43,7 +43,7 @@
                                 <label class="form-check-label" for="rememberMe">Recordar</label>
                             </div>
                             <div style="text-align: center;">
-                                <button type="submit" class="btn btn-custom">Login</button>
+                                <button type="submit" class="btn btn-custom" onclick="loginUser(event)">Login</button>
                             </div>
                         </form>
                     </div>
@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                             <div style="text-align: center;">
-                                <button type="submit" class="btn btn-custom">Registrarse</button>
+                                <button type="submit" class="btn btn-custom" onclick="checkEmail(event)">Registrarse</button>
                             </div>
                         </form>
                     </div>
@@ -140,7 +140,7 @@
                                 </label>
                             </div>
                             <div style="text-align: center;">
-                                <button type="submit" class="btn btn-custom">Completar Registro</button>
+                                <button type="submit" class="btn btn-custom" onclick="completeRegistration(event)">Completar Registro</button>
                             </div>
                         </form>
                     </div>
@@ -387,7 +387,7 @@
                     <p class="text-custom">
                         Nuestra planilla se basa en la unidad y el aprendizaje colectivo como pilares fundamentales. Creemos que trabajando juntos y compartiendo conocimientos podemos construir una comunidad estudiantil más fuerte, inclusiva y preparada para enfrentar los desafíos del futuro. ¡Vamos más allá del individualismo, apostamos por el poder de la colaboración!
                     </p>
-                    <a href="http://localhost:3000/projects" class="btn btn-custom mt-3">CONOCENOS
+                    <a href="https://www.instagram.com/octo.byte/" target="_blank" class="btn btn-custom mt-3">CONOCENOS
                         <i class="fa-solid fa-arrow-right ms-2"></i>
                     </a>
                 </div>
@@ -414,5 +414,6 @@
             crossorigin="anonymous"
         ></script>
         <script src="./styles/navbar.js"></script>
+        <script src="scripts/handlelog.js"></script>
     </body>
 </html>

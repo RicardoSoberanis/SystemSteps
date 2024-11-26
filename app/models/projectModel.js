@@ -10,6 +10,14 @@ const projectSchema = mongoose.Schema({
         type: String, // Contenido en formato Markdown
         required: true,
     },
+    banner: {
+        type: String, // URL o base64 de la imagen del banner
+        required: false, // Opcional si no siempre es obligatorio
+    },
+    category: {
+        type: String, // Categoría del proyecto
+        required: true,
+    },
     createdAt: {
         type: Date,
         default: Date.now, // Fecha de creación

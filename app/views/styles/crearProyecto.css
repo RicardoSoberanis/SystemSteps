@@ -8,7 +8,7 @@ body {
 .editor-container {
     display: flex;
     gap: 20px;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 180px);
 }
 
 .editor-section, .preview-section {
@@ -138,4 +138,39 @@ body {
 #projectTitle:focus {
     outline: none;
     border-color: transparent;
+}
+
+.invitacion {
+    margin-top: 80px;
+    justify-content: center;
+    text-align: center;
+    color: #000000;
+    font-family: "Montserrat", sans-serif;
+}
+
+#tituloInv {
+    margin: 30dvh 0;
+    font-size: 50px;
+    margin-bottom: 5dvh;
+    color: #eee;
+}
+
+#crearProyecto {
+    color: #fff;
+    height: 50px;
+    border: none;
+    border-radius: 20px;
+    width: 200px;
+    background-color: rgba(68, 108, 168, 0.877);
+    text-transform: uppercase;
+    margin-bottom: 25dvh;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#subInv {
+    margin: 60px;
+}
+
+#canvitas {
+    display: none;
 }

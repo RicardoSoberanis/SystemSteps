@@ -20,7 +20,8 @@
             background-size: cover; 
             background-position: center; 
             background-repeat: no-repeat; 
-            height: max-content;
+            display: grid;
+            min-height: 100%;
         }
 
         .navbar {
@@ -140,44 +141,85 @@
         </nav>
     </header>
 
-    <div class="header tittle">
-        <input id="projectTitle" type="text" class="text-custom" placeholder="Titulo del proyecto">
-        <div>
-            <button class="btn btn-outline-info me-2" data-bs-toggle="modal" data-bs-target="#helpModal">
-                <i class="bi bi-question-circle"></i> Ayuda
-            </button>
-            <button class="btn btn-primary save-btn" onclick="guardarProyecto(event)">
-                <i class="bi bi-save"></i> Guardar Proyecto
-            </button>
-        </div>
+    <div class="invitacion">
+        <h2 id="tituloInv">Transforma tu Aprendizaje, Comparte tu Conocimiento</h2>
+        <button id="crearProyecto" >Crear Proyecto</button>
     </div>
 
-    <div class="editor-container">
-        <div class="editor-section">
-            <div class="toolbar">
-                <button onclick="insertFormat('bold')" title="Negrita"><i class="bi bi-type-bold"></i></button>
-                <button onclick="insertFormat('italic')" title="Cursiva"><i class="bi bi-type-italic"></i></button>
-                <button onclick="insertFormat('strike')" title="Tachado"><i class="bi bi-type-strikethrough"></i></button>
-                <span class="separator"></span>
-                <button onclick="insertFormat('h1')" title="Título 1">H1</button>
-                <button onclick="insertFormat('h2')" title="Título 2">H2</button>
-                <button onclick="insertFormat('h3')" title="Título 3">H3</button>
-                <span class="separator"></span>
-                <button onclick="insertFormat('ul')" title="Lista sin orden"><i class="bi bi-list-ul"></i></button>
-                <button onclick="insertFormat('ol')" title="Lista ordenada"><i class="bi bi-list-ol"></i></button>
-                <button onclick="insertFormat('task')" title="Lista de tareas"><i class="bi bi-check2-square"></i></button>
-                <span class="separator"></span>
-                <button onclick="insertFormat('link')" title="Enlace"><i class="bi bi-link-45deg"></i></button>
-                <button onclick="showImageDialog()" title="Imagen"><i class="bi bi-image"></i></button>
-                <button onclick="insertFormat('code')" title="Código"><i class="bi bi-code-slash"></i></button>
-                <button onclick="insertFormat('quote')" title="Cita"><i class="bi bi-chat-square-quote"></i></button>
+    <div id="canvitas">
+        <div class="header">
+            <input id="projectTitle" type="text" class="text-custom" placeholder="Título del proyecto">
+            <div>
+                <button class="btn btn-outline-info me-2" data-bs-toggle="modal" data-bs-target="#helpModal">
+                    <i class="bi bi-question-circle"></i> Ayuda
+                </button>
+                <button class="btn btn-primary save-btn" onclick="guardarProyecto(event)">
+                    <i class="bi bi-save"></i> Guardar Proyecto
+                </button>
             </div>
-            <textarea id="markdown-editor"></textarea>
         </div>
-        <div class="preview-section">
-            <div id="preview"></div>
-        </div>
+        
+        <div class="editor-container">
+            <div class="editor-section">
+                <div class="toolbar">
+                    <button onclick="insertFormat('bold')" title="Negrita"><i class="bi bi-type-bold"></i></button>
+                    <button onclick="insertFormat('italic')" title="Cursiva"><i class="bi bi-type-italic"></i></button>
+                    <button onclick="insertFormat('strike')" title="Tachado"><i class="bi bi-type-strikethrough"></i></button>
+                    <span class="separator"></span>
+                    <button onclick="insertFormat('h1')" title="Título 1">H1</button>
+                    <button onclick="insertFormat('h2')" title="Título 2">H2</button>
+                    <button onclick="insertFormat('h3')" title="Título 3">H3</button>
+                    <span class="separator"></span>
+                    <button onclick="insertFormat('ul')" title="Lista sin orden"><i class="bi bi-list-ul"></i></button>
+                    <button onclick="insertFormat('ol')" title="Lista ordenada"><i class="bi bi-list-ol"></i></button>
+                    <button onclick="insertFormat('task')" title="Lista de tareas"><i class="bi bi-check2-square"></i></button>
+                    <span class="separator"></span>
+                    <button onclick="insertFormat('link')" title="Enlace"><i class="bi bi-link-45deg"></i></button>
+                    <button onclick="showImageDialog()" title="Imagen"><i class="bi bi-image"></i></button>
+                    <button onclick="insertFormat('code')" title="Código"><i class="bi bi-code-slash"></i></button>
+                    <button onclick="insertFormat('quote')" title="Cita"><i class="bi bi-chat-square-quote"></i></button>
+                </div>
+                <textarea id="markdown-editor"></textarea>
+            </div>
+            <div class="preview-section">
+                <div id="preview"></div>
+            </div>
+        </div>    
     </div>
+
+    <div class="modal fade" id="createProjectModal" tabindex="-1" aria-labelledby="createProjectModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createProjectModalLabel">Crear Nuevo Proyecto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="projectTitleInput" class="form-label">Título del Proyecto</label>
+                        <input id="projectTitleInput" type="text" class="form-control" placeholder="Introduce el título">
+                    </div>
+                    <div class="mb-3">
+                        <label for="projectBannerInput" class="form-label">Imagen del Banner</label>
+                        <input id="projectBannerInput" type="file" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="projectCategoryInput" class="form-label">Categoría</label>
+                        <select id="projectCategoryInput" class="form-select">
+                            <option value="baseDatos">Base de Datos</option>
+                            <option value="desarrolloWeb">Desarrollo Web</option>
+                            <option value="seguridad">Servicios Seguros</option>
+                            <!-- Agrega más categorías según sea necesario -->
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="saveProjectBtn">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>    
 
     <!-- Modal de Ayuda -->
     <div class="modal fade" id="helpModal" tabindex="-1">
