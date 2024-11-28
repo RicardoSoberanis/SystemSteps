@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Obtener los datos del usuario
         const userData = await response.json();
 
-        // Guardar en sessionStorage
+        // Guardar los datos del usuario en sessionStorage como string
         sessionStorage.setItem('user', JSON.stringify(userData));
 
         // Perfil principal
@@ -46,4 +46,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error("Error al obtener información del usuario:", error);
         alert("Error en la conexión con el servidor.");
     }
+
+    
 });
+
+
