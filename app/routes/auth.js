@@ -21,11 +21,11 @@ router.post('/check-email', async (req, res) => {
 
 // Registro de usuario
 router.post('/register', async (req, res) => {
-    const { name, email, password, carrera, edad, usuario } = req.body;
+    const { name, email, password, carrera, edad, usuario, gitHubUser, linkedInUser} = req.body;
     try {
         const hashedPassword = password;
 
-        const newUser = new User({ name, email, password: hashedPassword, carrera, edad, usuario});
+        const newUser = new User({ name, email, password: hashedPassword, carrera, edad, usuario, gitHubUser, linkedInUser});
         const savedUser = await newUser.save();
 
         // Generar un token JWT para el usuario registrado
