@@ -4,7 +4,6 @@ try {
     const response = await fetch("http://localhost:3000/users/find", {
         method: "GET",
         headers: {
-            // "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`,
         }
     });

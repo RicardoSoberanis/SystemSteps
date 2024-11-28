@@ -70,13 +70,14 @@ async function completeRegistration(event) {
     const name = document.getElementById('registerFullName').value;
     const edad = document.getElementById('registerAge').value;
     const carrera = document.getElementById('registerCareer').value;
-    const imageProfile = document.getElementById('registerImage').value;
+    const gitHubUser = document.getElementById('registergitHubUser').value;
+    const linkedInUser = document.getElementById('registerlinkedInUser').value;
 
     try {
         const response = await fetch('http://localhost:3000/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: tempEmail, password: tempPassword, usuario, name, edad, carrera, imageProfile}),
+            body: JSON.stringify({ email: tempEmail, password: tempPassword, usuario, name, edad, carrera, gitHubUser, linkedInUser}),
         });
 
         const data = await response.json();
