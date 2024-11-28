@@ -142,6 +142,9 @@ async function guardarProyecto(event) {
             alert(`Error: ${errorData.message || "No autorizado"}`);
             return;
         }
+
+        const dataProjectJson = await response.json();
+        sessionStorage.setItem('dataProject', JSON.stringify(dataProjectJson));
     
         alert("Proyecto guardado exitosamente");
     } catch (error) {
