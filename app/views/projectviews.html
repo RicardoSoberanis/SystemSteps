@@ -9,6 +9,421 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="styles/crearProyecto.css">
 
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                    <input type="email" id="email" class="form-control" placeholder="Ingresa tu correo" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" id="password" class="form-control" placeholder="Ingresa tu contraseña" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">Recordar</label>
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn btn-custom" onclick="loginUser(event)">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p>¿No tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate aquí</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registerModalLabel">Crear Cuenta</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label">Correo</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                    <input type="email" id="registerEmail" class="form-control" placeholder="Ingresa tu correo" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label">Contraseña</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" id="registerPassword" class="form-control" placeholder="Ingresa tu contraseña" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirma tu contraseña" required>
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn btn-custom" onclick="checkEmail(event)">Registrarse</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p>¿Ya tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión aquí</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="registerInfoModal" tabindex="-1" aria-labelledby="registerInfoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registerInfoModalLabel">Completa tu Perfil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="registerUsername" class="form-label">Nombre de Usuario</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                                    <input type="text" id="registerUsername" class="form-control" placeholder="Elige un nombre de usuario" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerFullName" class="form-label">Nombre Completo</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                                    <input type="text" id="registerFullName" class="form-control" placeholder="Ingresa tu nombre completo" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerAge" class="form-label">Edad</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-calendar"></i></span>
+                                    <input type="number" id="registerAge" class="form-control" placeholder="Ingresa tu edad" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerCareer" class="form-label">Carrera</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-graduation-cap"></i></span>
+                                    <input type="text" id="registerCareer" class="form-control" placeholder="Ingresa tu carrera" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registergitHubUser" class="form-label">Usuario de GitHub</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-brands fa-github social-icon"></i></span>
+                                    <input type="text" id="registergitHubUser" class="form-control" placeholder="Ingresa tu usuario de Github" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerlinkedInUser" class="form-label">Usuario de LinkedIn</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="fa-solid fa-brands fa-linkedin social-icon"></i></span>
+                                    <input type="text" id="registerlinkedInUser" class="form-control" placeholder="Ingresa tu usuario de LinkedIn" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerimageProfile" class="form-label">Foto de perfil</label>
+                                <input id="registerimageProfile" type="file" class="form-control">
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="termsCheck" required>
+                                <label class="form-check-label" for="termsCheck">
+                                    Acepto los <a href="#" target="_blank">Términos y Condiciones</a>
+                                </label>
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn btn-custom" onclick="completeRegistration(event)">Completar Registro</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .navbar {
+                margin-top: 5px;
+                padding: 0.5rem 1rem;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1050;
+                font-family: "Montserrat", sans-serif;
+                font-optical-sizing: auto;
+                font-style: normal;
+            }
+
+            .navbar.scrolled {
+                background-color: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(15px);
+                border-radius: 50px;
+            }
+
+            .navbar-brand {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            @media (max-width: 991px) {
+                .navbar-brand {
+                    position: relative;
+                    left: 0;
+                    transform: none;
+                }
+            }
+
+            .text-custom{
+                color: #ffffff;
+                font-family: "Montserrat", sans-serif;
+                font-optical-sizing: auto;
+                font-style: normal;
+            }
+
+            .text-custom-dark{
+                color: #0056b3;
+                font-family: "Montserrat", sans-serif;
+                font-optical-sizing: auto;
+                font-style: normal;
+            }
+
+            .btn-custom {
+                color: #00a9f2;
+                background-color: #ffffff;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+                border-radius: 20px;
+            }
+
+            .btn-custom:hover {
+                color: #ffffff;
+                background-color: transparent;
+            }
+
+            .carousel-section {
+                padding: 2rem 0;
+                max-width: 800px; 
+                margin: 0 auto;
+            }
+
+            .carousel-title {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                text-align: center;
+                margin-bottom: 1.5rem;
+                font-size: 1.5rem;
+                color: #00a9f2;
+            }
+
+            .carousel {
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .image-container {
+                position: relative;
+                width: 100%;
+                height: 400px;  /* Altura fija para todas las imágenes */
+                overflow: hidden;
+            }
+
+            .image-container::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(
+                    to bottom,
+                    rgba(255, 255, 255, 0) 30%,
+                    rgba(255, 255, 255, 0.8) 100%
+                );
+                pointer-events: none;
+            }
+
+            .carousel-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            /* Estilos para los indicadores */
+            .carousel-indicators {
+                bottom: -40px;
+            }
+
+            .carousel-indicators li {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                margin: 0 5px;
+                background-color: #00a9f2;
+                opacity: 0.5;
+            }
+
+            .carousel-indicators .active {
+                opacity: 1;
+            }
+
+            .carousel-control-prev,
+            .carousel-control-next {
+                width: 40px;
+                height: 40px;
+                background-color: #00a9f2;
+                border-radius: 50%;
+                top: 50%;
+                transform: translateY(-50%);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .carousel:hover .carousel-control-prev,
+            .carousel:hover .carousel-control-next {
+                opacity: 1;
+            }
+
+            .carousel-control-prev {
+                left: 20px;
+            }
+
+            .carousel-control-next {
+                right: 20px;
+            }
+
+            @media (max-width: 768px) {
+                .image-container {
+                    height: 300px;
+                }
+                
+                .carousel-section {
+                    padding: 1rem;
+                }
+                
+                .carousel-control-prev,
+                .carousel-control-next {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+
+
+            .modal-content {
+                font-family: "Montserrat", sans-serif;
+                font-optical-sizing: auto;
+                font-style: normal;
+                background-color: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(40px);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+                color: #ffffff;
+            }
+
+            main {
+                padding-top: 76px; 
+            }
+
+            .article-card {
+                width: 100%;
+                height: 220px;
+                border-radius: 10px;
+                overflow: hidden;
+                position: relative;
+                font-family: "Montserrat", sans-serif;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+                transition: all 300ms ease-in-out;
+            }
+
+            .article-card img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: relative;
+                z-index: 1;
+            }
+
+            .article-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: none; /* Sin degradado inicialmente */
+                z-index: 2;
+                transition: background 300ms ease-in-out;
+            }
+
+            .article-card:hover::before {
+                background: linear-gradient(
+                    to bottom,
+                    rgba(255, 255, 255, 0) 0%,
+                    #172d9d 100%
+                );
+            }
+
+            .article-card .content {
+                position: absolute;
+                bottom: 0;
+                z-index: 3;
+                padding: 20px;
+                background: none;
+                color: black;
+                transition: all 300ms ease-in-out;
+            }
+
+            .article-card .date,
+            .article-card .title {
+                margin: 0;
+            }
+
+            .article-card .date {
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.9);
+                margin-bottom: 4px;
+                opacity: 1;
+                transition: opacity 300ms ease-in-out;
+            }
+
+            .article-card .title {
+                font-size: 17px;
+                color: #fff;
+                transition: font-size 300ms ease-in-out;
+            }
+
+            .article-card:hover .date {
+                opacity: 0; /* Hace que la fecha desaparezca */
+            }
+
+            .article-card:hover .title {
+                font-size: 22px; /* Incrementa el tamaño del texto */
+            }
+        </style>
+
   <style>
     body {
       background-image: url('/app/views/img/milad-fakurian-PGdW_bHDbpI-unsplash.jpg');
@@ -86,6 +501,59 @@
 </head>
 
 <body>
+
+  <header>
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand d-none d-lg-block" href="http://localhost:3000/home">
+                <img src="img/logoss_black.png" alt="Logo" height="44" class="d-inline-block align-text-top">
+            </a>
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:3000/projects">PROJECTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:3000/create-project">CREATE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:3000/aboutus">ABOUT US</a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav ms-auto d-flex align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" role="button" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="nav-link" style="color: black; margin-right: 10px;">Log In</i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:3000/profile">
+                            <i class="fa-solid fa-user" style="color: black; margin-right: 10px; margin-top: 5px;"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="display: none;">
+                        <a class="nav-link" href="http://localhost:3000/notifications">
+                            <i class="fa fa-bell" style="color: black; margin-right: 10px; margin-top: 5px;"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="logoutButton" class="nav-link" role="button">
+                            <i class="fas fa-sign-out-alt" style="color: black; margin-right: 10px;"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
   <div class="container py-5">
     <h1 class="text-center mb-4">Project Showcase</h1>
     <div class="row" id="project-container">
@@ -104,9 +572,11 @@
     <div class="row">
       <div class="col-md-8">
         <!-- Markdown Preview -->
-        <div id="project-content" class="markdown-preview"></div>
+        <div id="project-content" class="markdown-preview" style="text-align: center; display: flex; align-items: center; justify-content: center;"></div>
       </div>
+    </div>
 
+    <div class="row" style="margin-top: 20px;">
       <div class="col-md-4">
         <div class="card">
           <div class="card-body">
@@ -139,7 +609,7 @@
 
       <div class="comment-form mt-3">
         <textarea id="new-comment-text" class="form-control" rows="3" placeholder="Escribe un comentario..."></textarea>
-        <button id="submit-comment-btn" class="btn btn-primary mt-2">Publicar Comentario</button>
+        <button id="submit-comment-btn" class="btn btn-primary mt-2" onclick="addComment(event)">Publicar Comentario</button>
       </div>
     </div>
   </div>
@@ -217,6 +687,72 @@
         console.error('Error al cargar los datos:', error);
         alert('Hubo un problema al cargar los datos. Revisa la consola para más detalles.');
       }
+
+      async function addComment(event) {
+    event.preventDefault();
+
+    // Recuperar el contenido del comentario
+    const content = document.getElementById('new-comment-text').value.trim();
+
+    // Verificar si el contenido está vacío
+    if (!content) {
+        alert("El comentario no puede estar vacío.");
+        return;
+    }
+
+    // Obtener el ID del proyecto de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const projectId = urlParams.get('id');
+
+    if (!projectId) {
+        alert("No se pudo obtener el ID del proyecto.");
+        return;
+    }
+
+    // Verificar si hay token de autenticación
+    const token = localStorage.getItem("token");
+    if (!token) {
+        alert("Debes iniciar sesión para agregar comentarios.");
+        const loginModal = new bootstrap.Modal(document.getElementById("loginModal"));
+        loginModal.show();
+        return;
+    }
+
+    try {
+        // Crear el objeto de datos para el comentario
+        const commentData = { content };
+
+        // Hacer la solicitud POST para agregar el comentario
+        const response = await fetch(`http://localhost:3000/projects/${projectId}/comments`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(commentData)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Error:", errorData);
+            alert(`Error: ${errorData.message || "No autorizado"}`);
+            return;
+        }
+
+        const newComment = await response.json();
+        console.log("Comentario agregado:", newComment);
+
+        // Actualizar la interfaz con el nuevo comentario (opcional)
+        alert("Comentario agregado exitosamente.");
+        // Aquí podrías actualizar la lista de comentarios en la página
+
+    } catch (error) {
+        console.error("Error al agregar el comentario:", error);
+        alert("Error en la conexión con el servidor.");
+    }
+}
+
+
     });
   </script>  
   
