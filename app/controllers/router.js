@@ -16,8 +16,8 @@ router.use(express.json());
 
 // Rutas
 router.use('/auth', authRouter);
-router.use('/users', authenticateToken, userRouter);
-router.use('/projectsHandler', authenticateToken, projectRouter);
+router.use('/users', userRouter);
+router.use('/projectsHandler', projectRouter);
 router.use('/news', newsRouter);
 
 // Rutas para vistas

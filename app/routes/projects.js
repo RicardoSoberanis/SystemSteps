@@ -24,7 +24,7 @@ const {
 } = require('../controllers/projectInteractions');
 
 // Rutas para CRUD básico
-router.post('/', upload.single('banner'), async (req, res) => {
+router.post('/', authenticateToken, upload.single('banner'), async (req, res) => {
     try {
         const projectData = req.body;
         if (req.file) {
