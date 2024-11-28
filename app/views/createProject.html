@@ -204,13 +204,59 @@
                         <input id="projectBannerInput" type="file" class="form-control">
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">Lenguajes</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="languageJava" value="java">
+                            <label class="form-check-label" for="languageJava">Java</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="languagePython" value="python">
+                            <label class="form-check-label" for="languagePython">Python</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="languageJavaScript" value="javascript">
+                            <label class="form-check-label" for="languageJavaScript">JavaScript</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="languageC" value="c">
+                            <label class="form-check-label" for="languageC">C#</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="languageSQL" value="sql">
+                            <label class="form-check-label" for="languageSQL">SQL</label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
                         <label for="projectCategoryInput" class="form-label">Categoría</label>
                         <select id="projectCategoryInput" class="form-select">
+                            <option value="">Selecciona una categoría</option>
+                            <option value="web">Desarrollo Web</option>
+                            <option value="mobile">Desarrollo Móvil</option>
+                            <option value="desktop">Aplicaciones de Escritorio</option>
+                            <option value="backend">Desarrollo Backend</option>
+                            <option value="fullstack">Desarrollo Full Stack</option>
+                            <option value="dataScience">Ciencia de Datos</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="projectClassInput" class="form-label">Clase</label>
+                        <select id="projectClassInput" class="form-select">
                             <option value="baseDatos">Base de Datos</option>
                             <option value="desarrolloWeb">Desarrollo Web</option>
                             <option value="seguridad">Servicios Seguros</option>
-                            <option value="programacion">Progamacion Estructurada</option>
-                            <!-- Agrega más categorías según sea necesario -->
+                            <option value="programacion">Programación Estructurada</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="projectProfessorInput" class="form-label">Profesor</label>
+                        <select id="projectProfessorInput" class="form-select">
+                            <option value="dorx">Dorx</option>
+                            <option value="carlos">Carlos</option>
+                            <option value="gatica">Gatica</option>
+                            <option value="elvira">Elvira</option>
                         </select>
                     </div>
                 </div>

@@ -14,6 +14,18 @@ const projectSchema = mongoose.Schema({
         type: String, // URL o base64 de la imagen del banner
         required: false, // Opcional si no siempre es obligatorio
     },
+    professor: {
+        type: String,
+        required: true,
+    },
+    class: {
+        type: String,
+        required: true,
+    },
+    lenguajes: {
+        type: [String],
+        required: true
+    },
     category: {
         type: String, // Categoría del proyecto
         required: true,
