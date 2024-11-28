@@ -1,5 +1,5 @@
-
 document.addEventListener('DOMContentLoaded', () => {
+
     const editButton = document.getElementById('editProfile');
     const saveButton = document.getElementById('saveProfile');
     const inputs = document.querySelectorAll('.form-control');
@@ -32,3 +32,5 @@ document.addEventListener('DOMContentLoaded', () => {
         editButton.classList.remove('d-none'); 
     });
 });
+
+
