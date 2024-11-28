@@ -27,6 +27,22 @@ const projectSchema = mongoose.Schema({
         ref: 'users', // Nombre de la colección de usuarios
         required: true,
     },
+    likes:{
+        type:Number,
+        default: 0,
+    },
+    comments:{
+        userId:{ type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true },
+        text: { type: String, required: true },
+        likes: { type: Number, default: 0 },
+        replies: [ 
+            {
+                userId: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true },
+                text: { type: String, required: true },
+                likes: { type: Number, default: 0 },
+            },
+            ],
+    },
 });
 
 // Modelo de Proyectos
