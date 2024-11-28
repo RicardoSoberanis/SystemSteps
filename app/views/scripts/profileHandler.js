@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         detailRows[4].querySelector('.col-sm-9').textContent = userData.puntos;
         detailRows[5].querySelector('.col-sm-9').textContent = userData.insignias.length;
 
-        alert("Información de usuario guardada exitosamente");
     } catch (error) {
         console.error("Error al obtener información del usuario:", error);
         alert("Error en la conexión con el servidor.");
