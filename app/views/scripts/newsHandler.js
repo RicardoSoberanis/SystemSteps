@@ -1,7 +1,7 @@
 function createNewsCards(newsData) {
     const container = document.querySelector('.container .row'); // Selecciona el contenedor de cards existente
     
-    container.innerHTML = ''; // Limpia el contenido anterior
+    container.innerHTML = '';
     
     newsData.forEach(news => {
         const cardHTML = `
