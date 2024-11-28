@@ -18,7 +18,7 @@ const projectSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    class: {
+    projectClass: {
         type: String,
         required: true,
     },
