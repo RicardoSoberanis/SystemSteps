@@ -1,13 +1,2 @@
-POST http://localhost:3000/auth/check-email
-Content-Type: application/json
-token: session.storage
-
-{
-    "email": "hola@ricardo.mx"
-}
-
-
-### Obtener un usuario 
 GET http://localhost:3000/users/find
-Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N…A5Mn0.UM7wSLQ8a3R4a81Q-SWTV1sekdnyoz-U_g7usntnVi4

@@ -47,7 +47,32 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert("Error en la conexión con el servidor.");
     }
 
-    
+    try {
+        const userid = JSON.parse(sessionStorage.getItem('user'))._id;
+        const response = await fetch("http://localhost:3000/projectsHandler/user/" + userid, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            }
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Error:", errorData);
+            alert(`Error: ${errorData.message || "No autorizado"}`);
+            return;
+        }
+
+        // Obtener los datos del usuario
+        const myProjectsData = await response.json();
+
+        // Guardar los datos del usuario en sessionStorage como string
+        sessionStorage.setItem('myProjects', JSON.stringify(myProjectsData));
+
+    } catch (error) {
+        console.error("Error al obtener información del usuario:", error);
+        alert("Error en la conexión con el servidor.");
+    }
 });
 
 

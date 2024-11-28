@@ -69,6 +69,7 @@ router.get('/', async (req, res) => {
 router.get('/user/:userId', authenticateToken, async (req, res) => {
     try {
         const projects = await getProjectsByUser(req.params.userId);
+        console.log(projects)
         res.status(200).json(projects);
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener los proyectos' });
