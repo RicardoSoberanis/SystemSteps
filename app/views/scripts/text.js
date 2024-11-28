@@ -118,24 +118,31 @@ async function guardarProyecto(event) {
         return;
     }
 
+    // Recuperar el archivo de banner
+    const bannerFile = document.getElementById('projectBannerInput').files[0];
+
     try {
+        // Crear FormData para enviar el archivo junto con los datos
+        const formData = new FormData();
+        formData.append("content", content);
+        formData.append("title", title);
+        formData.append("category", category);
+        formData.append("languages", JSON.stringify(languages));
+        formData.append("projectClass", projectClass);
+        formData.append("professor", professor);
+
+        if (bannerFile) {
+            formData.append("banner", bannerFile);
+        }
+
         const response = await fetch("http://localhost:3000/projectsHandler", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
+                "Authorization": `Bearer ${token}`, // Solo el token, no se necesita "Content-Type" con FormData
             },
-            body: JSON.stringify({ 
-                content, 
-                title, 
-                banner, 
-                category,
-                languages,
-                projectClass,
-                professor
-            }),
+            body: formData, // Enviar FormData en lugar de JSON
         });
-    
+
         if (!response.ok) {
             const errorData = await response.json();
             console.error("Error:", errorData);
@@ -145,7 +152,7 @@ async function guardarProyecto(event) {
 
         const dataProjectJson = await response.json();
         sessionStorage.setItem('dataProject', JSON.stringify(dataProjectJson));
-    
+
         alert("Proyecto guardado exitosamente");
     } catch (error) {
         console.error("Error al guardar el proyecto:", error);

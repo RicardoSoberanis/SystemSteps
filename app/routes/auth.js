@@ -4,6 +4,7 @@ const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const userController = require('../controllers/users');
+const upload = require('../middlewares/multerConfig');
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -19,13 +20,29 @@ router.post('/check-email', async (req, res) => {
     }
 });
 
-// Registro de usuario
-router.post('/register', async (req, res) => {
-    const { name, email, password, carrera, edad, usuario, gitHubUser, linkedInUser} = req.body;
+// Registro de usuario con manejo de archivos
+router.post('/register', upload.single('imageProfile'), async (req, res) => {
     try {
-        const hashedPassword = password;
+        const { name, email, password, carrera, edad, usuario, gitHubUser, linkedInUser } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-        const newUser = new User({ name, email, password: hashedPassword, carrera, edad, usuario, gitHubUser, linkedInUser});
+        const userData = {
+            name,
+            email,
+            password: hashedPassword,
+            carrera,
+            edad,
+            usuario,
+            gitHubUser,
+            linkedInUser
+        };
+
+        // Si se subió una imagen de perfil, agregar la ruta
+        if (req.file) {
+            userData.imageProfile = `/uploads/${req.file.filename}`;
+        }
+
+        const newUser = new User(userData);
         const savedUser = await newUser.save();
 
         // Generar un token JWT para el usuario registrado
@@ -39,6 +56,7 @@ router.post('/register', async (req, res) => {
                 id: savedUser._id,
                 name: savedUser.name,
                 email: savedUser.email,
+                imageProfile: savedUser.imageProfile
             },
         });
     } catch (error) {
@@ -72,6 +90,7 @@ router.post('/login', async (req, res) => {
                 id: user._id,
                 name: user.name,
                 email: user.email,
+                imageProfile: user.imageProfile
             },
         });
     } catch (error) {

@@ -1,21 +1,36 @@
 const express = require('express');
 const router = express.Router();
-const authenticateToken = require('../middlewares/authMiddleware'); // Middleware para verificar el token
+const upload = require('../middlewares/multerConfig');
+const authenticateToken = require('../middlewares/authMiddleware');
 const {
     addProject,
     getProjectsByUser,
     updateProject,
     deleteProject,
 } = require('../controllers/projects');
+const {
+    getAllProjects,
+    getProjectsByCategory,
+    getProjectsByProfessor,
+    getProjectsByClass,
+    getProjectsByLanguage,
+} = require('../controllers/projectQueries');
+const {
+    addProjectLike,
+    addComment,
+    addCommentLike,
+    addReply,
+    addReplyLike,
+} = require('../controllers/projectInteractions');
 
-// Crear un proyecto
-router.post('/', authenticateToken, async (req, res) => {
-
-    console.log('si llega a la ruta')
+// Rutas para CRUD básico
+router.post('/', upload.single('banner'), async (req, res) => {
     try {
         const projectData = req.body;
-        console.log(req.user)
-        projectData.userId = req.user.id; // Asigna el usuario autenticado como creador
+        if (req.file) {
+            projectData.banner = `/uploads/${req.file.filename}`;
+        }
+        projectData.userId = req.user.id;
         const newProject = await addProject(projectData);
         res.status(201).json(newProject);
     } catch (error) {
@@ -23,19 +38,99 @@ router.post('/', authenticateToken, async (req, res) => {
         const errorMessage = error.status === 405 
             ? 'Titulo duplicado. Cambie el titulo' 
             : 'Error al crear el proyecto';
-        
         res.status(statusCode).json({ error: errorMessage });
     }
 });
 
-// Obtener proyectos de un usuario
+// Rutas de búsqueda
+router.get('/', async (req, res) => {
+    try {
+        const { category, professor, projectClass, language } = req.query;
+        let projects;
+
+        if (category) {
+            projects = await getProjectsByCategory(category);
+        } else if (professor) {
+            projects = await getProjectsByProfessor(professor);
+        } else if (projectClass) {
+            projects = await getProjectsByClass(projectClass);
+        } else if (language) {
+            projects = await getProjectsByLanguage(language);
+        } else {
+            projects = await getAllProjects();
+        }
+
+        res.status(200).json(projects);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.get('/user/:userId', authenticateToken, async (req, res) => {
     try {
-        const userId = req.params.userId;
-        const projects = await getProjectsByUser(userId);
+        const projects = await getProjectsByUser(req.params.userId);
         res.status(200).json(projects);
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener los proyectos' });
+    }
+});
+
+// Rutas de interacción
+router.post('/:projectId/like', authenticateToken, async (req, res) => {
+    try {
+        const project = await addProjectLike(req.params.projectId);
+        res.json({ likes: project.likes });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.post('/:projectId/comments', authenticateToken, async (req, res) => {
+    try {
+        const project = await addComment(req.params.projectId, req.user.id, req.body.text);
+        res.json(project.comments);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.post('/:projectId/comments/:commentId/like', authenticateToken, async (req, res) => {
+    try {
+        const project = await addCommentLike(req.params.projectId, req.params.commentId);
+        const comment = project.comments.id(req.params.commentId);
+        res.json({ likes: comment.likes });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.post('/:projectId/comments/:commentId/reply', authenticateToken, async (req, res) => {
+    try {
+        const project = await addReply(
+            req.params.projectId,
+            req.params.commentId,
+            req.user.id,
+            req.body.text
+        );
+        const comment = project.comments.id(req.params.commentId);
+        res.json(comment.replies);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.post('/:projectId/comments/:commentId/replies/:replyId/like', authenticateToken, async (req, res) => {
+    try {
+        const project = await addReplyLike(
+            req.params.projectId,
+            req.params.commentId,
+            req.params.replyId
+        );
+        const comment = project.comments.id(req.params.commentId);
+        const reply = comment.replies.id(req.params.replyId);
+        res.json({ likes: reply.likes });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 });
 
@@ -61,80 +156,5 @@ router.delete('/:projectId', authenticateToken, async (req, res) => {
         res.status(500).json({ error: 'Error al eliminar el proyecto' });
     }
 });
-
-//dar like a un proyecto
-router.post('/:id/like', async (req, res) => {
-    try {
-      const project = await Project.findById(req.params.id);
-      if (!project) return res.status(404).json({ message: 'Project not found' });
-  
-      project.likes += 1;
-      await project.save();
-  
-      res.json({ likes: project.likes });
-    } catch (error) {
-      res.status(500).json({ message: 'Error liking project' });
-    }
-});
-
-//agregar un comentario
-router.post('/:id/comments', async (req, res) => {
-    try {
-      const { text } = req.body;
-      const project = await Project.findById(req.params.id);
-      if (!project) return res.status(404).json({ message: 'Project not found' });
-  
-      project.comments.push({ text });
-      await project.save();
-  
-      res.json(project.comments);
-    } catch (error) {
-      res.status(500).json({ message: 'Error adding comment' });
-    }
-});
-
-
-
-  //dar like a un comentario
-router.post('/:projectId/comments/:commentId/like', async (req, res) => {
-  try {
-    const project = await Project.findById(req.params.projectId);
-    if (!project) return res.status(404).json({ message: 'Project not found' });
-
-    const comment = project.comments.id(req.params.commentId);
-    if (!comment) return res.status(404).json({ message: 'Comment not found' });
-
-    comment.likes += 1;
-    await project.save();
-
-    res.json({ likes: comment.likes });
-  } catch (error) {
-    res.status(500).json({ message: 'Error liking comment' });
-  }
-});
-
-
-
-//agregar una respuesta a un comentario
-router.post('/:projectId/comments/:commentId/reply', async (req, res) => {
-    try {
-      const { text } = req.body;
-      const project = await Project.findById(req.params.projectId);
-      if (!project) return res.status(404).json({ message: 'Project not found' });
-  
-      const comment = project.comments.id(req.params.commentId);
-      if (!comment) return res.status(404).json({ message: 'Comment not found' });
-  
-      comment.replies.push({ text });
-      await project.save();
-  
-      res.json(comment.replies);
-    } catch (error) {
-      res.status(500).json({ message: 'Error adding reply' });
-    }
-});
-
-
-
 
 module.exports = router;

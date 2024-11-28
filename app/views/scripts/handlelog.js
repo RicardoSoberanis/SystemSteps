@@ -3,7 +3,6 @@ let tempEmail = '';
 let tempPassword = '';
 
 async function checkEmail(event) {
-    // Evitar que el formulario se envíe y recargue la página
     event.preventDefault();
 
     const email = document.getElementById('registerEmail').value;
@@ -13,42 +12,36 @@ async function checkEmail(event) {
     tempEmail = email;
     tempPassword = confirmPassword;
 
-    // Validar que el email no esté vacío
     if (!email) {
         alert('Por favor, ingresa un correo válido.');
         return;
     }
 
-    // Validar que las contraseñas coincidan
     if (password !== confirmPassword) {
         alert('Las contraseñas no coinciden.');
         return;
     }
 
     try {
-        // Hacer la solicitud al backend
         const response = await fetch('http://localhost:3000/auth/check-email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email }), // Envía el email como JSON
+            body: JSON.stringify({ email }),
         });
 
-        // Manejar errores HTTP
         if (!response.ok) {
-            const errorData = await response.json(); // Extrae el mensaje del error
+            const errorData = await response.json();
             alert(errorData.message || 'Error al verificar el email.');
             return;
         }
 
-        const data = await response.json(); // Convierte la respuesta en JSON
+        const data = await response.json();
         if (data.success) {
-            // Cerrar el modal actual
             const registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
             if (registerModal) {
                 registerModal.hide();
             }
 
-            // Abrir el siguiente modal
             const registerInfoModalElement = document.getElementById('registerInfoModal');
             if (registerInfoModalElement) {
                 const registerInfoModal = new bootstrap.Modal(registerInfoModalElement);
@@ -64,30 +57,40 @@ async function checkEmail(event) {
 }
 
 async function completeRegistration(event) {
-    event.preventDefault(); // Evita que se recargue la página
+    event.preventDefault();
 
-    const usuario = document.getElementById('registerUsername').value;
-    const name = document.getElementById('registerFullName').value;
-    const edad = document.getElementById('registerAge').value;
-    const carrera = document.getElementById('registerCareer').value;
-    const gitHubUser = document.getElementById('registergitHubUser').value;
-    const linkedInUser = document.getElementById('registerlinkedInUser').value;
+    const formData = new FormData();
+    formData.append('email', tempEmail);
+    formData.append('password', tempPassword);
+    formData.append('usuario', document.getElementById('registerUsername').value);
+    formData.append('name', document.getElementById('registerFullName').value);
+    formData.append('edad', document.getElementById('registerAge').value);
+    formData.append('carrera', document.getElementById('registerCareer').value);
+    formData.append('gitHubUser', document.getElementById('registergitHubUser').value);
+    formData.append('linkedInUser', document.getElementById('registerlinkedInUser').value);
+
+    const imageFile = document.getElementById('registerimageProfile').files[0];
+    if (imageFile) {
+        formData.append('imageProfile', imageFile);
+    }
 
     try {
         const response = await fetch('http://localhost:3000/auth/register', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: tempEmail, password: tempPassword, usuario, name, edad, carrera, gitHubUser, linkedInUser}),
+            body: formData, // No establecer Content-Type, fetch lo hará automáticamente
         });
 
         const data = await response.json();
         if (data.success) {
-            localStorage.setItem('token', data.token); // Guarda el token en localStorage
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
             alert('Registro completado exitosamente. Ahora estás logueado.');
 
-            // Cerrar modal de registro
             const registerInfoModal = bootstrap.Modal.getInstance(document.getElementById('registerInfoModal'));
             registerInfoModal.hide();
+
+            // Redirigir al usuario a la página principal o actualizar la UI
+            window.location.href = '/home';
         } else {
             alert(data.message);
         }
@@ -112,12 +115,15 @@ async function loginUser(event) {
 
         const data = await response.json();
         if (data.success) {
-            localStorage.setItem('token', data.token); // Guarda el token en localStorage
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
             alert('Inicio de sesión exitoso');
 
-            // Cerrar modal de inicio de sesión
             const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
             loginModal.hide();
+
+            // Redirigir al usuario a la página principal o actualizar la UI
+            window.location.href = '/home';
         } else {
             alert(data.message);
         }
