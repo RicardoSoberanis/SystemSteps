@@ -62,6 +62,10 @@ const deleteProject = async (projectId) => {
     }
 };
 
+
+// subir la imagen
+// Las funciones de los proyectos
+
 module.exports = {
     addProject,
     getProjectsByUser,

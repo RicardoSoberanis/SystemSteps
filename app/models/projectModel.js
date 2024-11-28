@@ -11,8 +11,8 @@ const projectSchema = mongoose.Schema({
         required: true,
     },
     banner: {
-        type: String, // URL o base64 de la imagen del banner
-        required: false, // Opcional si no siempre es obligatorio
+        type: String,
+        default: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fes%2Fs%2Ffotos%2Fbanner-background&psig=AOvVaw0gutqZieTJi8jpJVQ4bDJn&ust=1732857143420000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLCIsYmi_okDFQAAAAAdAAAAABAw',
     },
     professor: {
         type: String,

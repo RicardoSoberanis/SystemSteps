@@ -92,7 +92,7 @@ async function guardarProyecto(event) {
         return;
     }
 
-    let { title, banner, category } = projectData;
+    let { title, banner, category, languages, projectClass, professor } = projectData;
 
     title = document.getElementById('projectTitle').value.trim();
 
@@ -125,7 +125,15 @@ async function guardarProyecto(event) {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`,
             },
-            body: JSON.stringify({ content, title, banner, category }),
+            body: JSON.stringify({ 
+                content, 
+                title, 
+                banner, 
+                category,
+                languages,
+                projectClass,
+                professor
+            }),
         });
     
         if (!response.ok) {
@@ -140,7 +148,6 @@ async function guardarProyecto(event) {
         console.error("Error al guardar el proyecto:", error);
         alert("Error en la conexión con el servidor.");
     }
-    
 }
 
 function setTitleAndSave(event) {
@@ -170,9 +177,37 @@ document.getElementById('saveProjectBtn').addEventListener('click', () => {
     const title = document.getElementById('projectTitleInput').value.trim();
     const category = document.getElementById('projectCategoryInput').value;
     const bannerFile = document.getElementById('projectBannerInput').files[0];
+    
+    // Obtener lenguajes seleccionados
+    const languages = Array.from(document.querySelectorAll('input[type="checkbox"][id^="language"]:checked'))
+        .map(checkbox => checkbox.value);
+    
+    const projectClass = document.getElementById('projectClassInput').value;
+    const professor = document.getElementById('projectProfessorInput').value;
 
+    // Validaciones
     if (!title) {
         alert('El título del proyecto es obligatorio.');
+        return;
+    }
+
+    if (!category) {
+        alert('Debes seleccionar una categoría.');
+        return;
+    }
+
+    if (languages.length === 0) {
+        alert('Debes seleccionar al menos un lenguaje.');
+        return;
+    }
+
+    if (!projectClass) {
+        alert('Debes seleccionar una clase.');
+        return;
+    }
+
+    if (!professor) {
+        alert('Debes seleccionar un profesor.');
         return;
     }
 
@@ -183,9 +218,13 @@ document.getElementById('saveProjectBtn').addEventListener('click', () => {
         const projectData = {
             title,
             category,
+            languages,
+            projectClass,
+            professor,
             banner: bannerData
         };
 
+        // Guardar los datos en localStorage
         localStorage.setItem('projectData', JSON.stringify(projectData));
 
         document.getElementById('projectTitle').value = title;
