@@ -1,5 +1,6 @@
 import { fetchProjects } from '../api/projectApi.js';
 import { createProjectCard } from '../components/projectCard.js';
+import { createFilterButtons } from '../components/filterButtons.js';
 
 export async function displayPopularProjects() {
     const container = document.querySelector('.container-populares');
@@ -31,46 +32,39 @@ export async function displayRecentProjects() {
     });
 }
 
-export async function displayCategoryProjects() {
-    const container = document.querySelector('.container-categorias-content');
-    if (!container) return;
+export async function displayFilteredProjects(filterType, filterValue, contentContainer) {
+    if (!contentContainer) return;
+    if(filterType == 'categorias') filterType = 'category';
+    if(filterType == 'profesores') filterType = 'professor';
+    if(filterType == 'materia') filterType = 'projectClass';
+    if(filterType == 'lenguajes') filterType = 'languages';
 
-    const projects = await fetchProjects({ category: 'all' });
-    container.innerHTML = '';
+    const params = { [filterType]: filterValue };
+    const projects = await fetchProjects(params);
+
+    contentContainer.innerHTML = '';
     projects.forEach(project => {
-        container.appendChild(createProjectCard(project));
+        contentContainer.appendChild(createProjectCard(project));
     });
 }
 
-export async function displayLanguageProjects() {
-    const container = document.querySelector('.container-lenguajes-content');
-    if (!container) return;
+export function initializeFilterSection(filterType) {
+    const buttonContainer = document.querySelector(`.container-${filterType}`);
+    const contentContainer = document.querySelector(`.container-${filterType}-content`);
 
-    const projects = await fetchProjects({ language: 'all' });
-    container.innerHTML = '';
-    projects.forEach(project => {
-        container.appendChild(createProjectCard(project));
-    });
-}
+    if (!buttonContainer || !contentContainer) {
+        console.warn(`Contenedor para ${filterType} no encontrado.`);
+        return;
+    }
 
-export async function displayClassProjects() {
-    const container = document.querySelector('.container-materias-content');
-    if (!container) return;
+    createFilterButtons(buttonContainer, filterType);
 
-    const projects = await fetchProjects({ projectClass: 'all' });
-    container.innerHTML = '';
-    projects.forEach(project => {
-        container.appendChild(createProjectCard(project));
-    });
-}
+    buttonContainer.addEventListener('click', async (e) => {
+        const button = e.target.closest('button');
+        if (!button) return;
 
-export async function displayProfessorProjects() {
-    const container = document.querySelector('.container-profesores-content');
-    if (!container) return;
-
-    const projects = await fetchProjects({ professor: 'all' });
-    container.innerHTML = '';
-    projects.forEach(project => {
-        container.appendChild(createProjectCard(project));
+        const filterValue = button.dataset.filterValue;
+        console.log(filterValue)
+        await displayFilteredProjects(filterType, filterValue, contentContainer);
     });
 }

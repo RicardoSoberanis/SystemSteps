@@ -1,20 +1,18 @@
 import {
     displayPopularProjects,
     displayRecentProjects,
-    displayCategoryProjects,
-    displayLanguageProjects,
-    displayClassProjects,
-    displayProfessorProjects
+    initializeFilterSection,
 } from './sections/projectSections.js';
 
-// Inicializar todas las secciones cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', async () => {
+    // Muestra proyectos populares y recientes
     await Promise.all([
         displayPopularProjects(),
-        displayRecentProjects(),
-        displayCategoryProjects(),
-        displayLanguageProjects(),
-        displayClassProjects(),
-        displayProfessorProjects()
+        displayRecentProjects()
     ]);
-}); 
+
+    // Inicializa las secciones de filtros
+    ['lenguajes', 'categorias', 'materias', 'profesores'].forEach(type => {
+        initializeFilterSection(type);
+    });
+});

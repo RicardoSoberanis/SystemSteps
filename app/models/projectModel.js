@@ -22,7 +22,7 @@ const projectSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    lenguajes: {
+    languages: {
         type: [String],
         required: true
     },

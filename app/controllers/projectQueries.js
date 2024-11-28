@@ -35,7 +35,8 @@ const getProjectsByClass = async (projectClass) => {
 
 const getProjectsByLanguage = async (language) => {
     try {
-        return await Project.find({ lenguajes: language }).populate('userId', 'name email imageProfile');
+        return await Project.find({ languages: { $in: [language] } })
+            .populate('userId', 'name email imageProfile');
     } catch (error) {
         throw new Error('Error al obtener proyectos por lenguaje: ' + error.message);
     }
