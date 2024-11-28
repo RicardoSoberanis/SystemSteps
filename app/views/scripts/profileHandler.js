@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error("Error al obtener información del usuario:", error);
         alert("Error en la conexión con el servidor.");
     }
+    
 
     
 });
