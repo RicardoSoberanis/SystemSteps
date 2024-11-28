@@ -61,4 +61,79 @@ router.delete('/:projectId', authenticateToken, async (req, res) => {
     }
 });
 
+//dar like a un proyecto
+router.post('/:id/like', async (req, res) => {
+    try {
+      const project = await Project.findById(req.params.id);
+      if (!project) return res.status(404).json({ message: 'Project not found' });
+  
+      project.likes += 1;
+      await project.save();
+  
+      res.json({ likes: project.likes });
+    } catch (error) {
+      res.status(500).json({ message: 'Error liking project' });
+    }
+});
+
+//agregar un comentario
+router.post('/:id/comments', async (req, res) => {
+    try {
+      const { text } = req.body;
+      const project = await Project.findById(req.params.id);
+      if (!project) return res.status(404).json({ message: 'Project not found' });
+  
+      project.comments.push({ text });
+      await project.save();
+  
+      res.json(project.comments);
+    } catch (error) {
+      res.status(500).json({ message: 'Error adding comment' });
+    }
+});
+
+
+
+  //dar like a un comentario
+router.post('/:projectId/comments/:commentId/like', async (req, res) => {
+  try {
+    const project = await Project.findById(req.params.projectId);
+    if (!project) return res.status(404).json({ message: 'Project not found' });
+
+    const comment = project.comments.id(req.params.commentId);
+    if (!comment) return res.status(404).json({ message: 'Comment not found' });
+
+    comment.likes += 1;
+    await project.save();
+
+    res.json({ likes: comment.likes });
+  } catch (error) {
+    res.status(500).json({ message: 'Error liking comment' });
+  }
+});
+
+
+
+//agregar una respuesta a un comentario
+router.post('/:projectId/comments/:commentId/reply', async (req, res) => {
+    try {
+      const { text } = req.body;
+      const project = await Project.findById(req.params.projectId);
+      if (!project) return res.status(404).json({ message: 'Project not found' });
+  
+      const comment = project.comments.id(req.params.commentId);
+      if (!comment) return res.status(404).json({ message: 'Comment not found' });
+  
+      comment.replies.push({ text });
+      await project.save();
+  
+      res.json(comment.replies);
+    } catch (error) {
+      res.status(500).json({ message: 'Error adding reply' });
+    }
+});
+
+
+
+
 module.exports = router;
