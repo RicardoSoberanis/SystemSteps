@@ -62,6 +62,19 @@ const deleteProject = async (projectId) => {
     }
 };
 
+const getProjectById = async (projectId) => {
+    try {
+        const project = await Project.findById(projectId)
+            .populate('userId', 'usuario email'); // Populate user details
+        if (!project) {
+            throw new Error('Proyecto no encontrado');
+        }
+        return project;
+    } catch (error) {
+        console.error('Error al obtener proyecto:', error);
+        throw error;
+    }
+};
 
 // subir la imagen
 // Las funciones de los proyectos
@@ -71,4 +84,5 @@ module.exports = {
     getProjectsByUser,
     updateProject,
     deleteProject,
+    getProjectById
 };

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,42 +84,62 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container py-5">
     <h1 class="text-center mb-4">Project Showcase</h1>
     <div class="row" id="project-container">
-      <!-- Dynamic cards will be injected here -->
+      <div class="preview-section">
+        <div id="preview"></div>
+      </div>
     </div>
   </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="projectModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title" id="projectTitle"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <img id="projectImage" class="img-fluid rounded mb-3" alt="Project Image">
-          <p id="projectDescription"></p>
-          <div class="d-flex align-items-center">
-            <div id="projectLikes" class="me-3">
-              <span id="likeCount">0</span> Likes
-            </div>
-            <div id="likeProject" class="like-icon">
-              <i class="fas fa-heart"></i>
-            </div>
-          </div>
+  <div class="container mt-5">
+    <div id="project-banner" class="text-center mb-4">
+      <img id="project-banner-img" src="" alt="Project Banner" class="img-fluid">
+      <h1 id="project-title" class="mt-3"></h1>
+    </div>
 
-          <div class="comment-section">
-            <h5>Comments</h5>
-            <div id="commentsContainer" class="mt-3">
-            </div>
-            <textarea id="newComment" class="form-control mt-3" placeholder="Write a comment..."></textarea>
-            <button class="btn btn-primary mt-2" id="postComment">Post Comment</button>
+    <div class="row">
+      <div class="col-md-8">
+        <!-- Markdown Preview -->
+        <div id="project-content" class="markdown-preview"></div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Detalles del Proyecto</h5>
+            <p><strong>Autor:</strong> <span id="project-author"></span></p>
+            <p><strong>Categoría:</strong> <span id="project-category"></span></p>
+            <p><strong>Lenguajes:</strong> <span id="project-languages"></span></p>
+            <p><strong>Clase:</strong> <span id="project-class"></span></p>
+            <p><strong>Profesor:</strong> <span id="project-professor"></span></p>
           </div>
         </div>
+
+        <div class="card mt-3">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <button id="like-project-btn" class="btn btn-outline-primary me-2">
+                <i class="fas fa-heart"></i>
+                <span id="project-likes">0</span> Likes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="mt-4">
+      <h3>Comentarios</h3>
+      <div id="comments-container"></div>
+
+      <div class="comment-form mt-3">
+        <textarea id="new-comment-text" class="form-control" rows="3" placeholder="Escribe un comentario..."></textarea>
+        <button id="submit-comment-btn" class="btn btn-primary mt-2">Publicar Comentario</button>
       </div>
     </div>
   </div>
@@ -126,69 +147,79 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   <script>
-    const projects = [
-      {
-        id: 1,
-        title: "Project One",
-        description: "This is an amazing project with lots of potential!",
-        image: "https://via.placeholder.com/300",
-        likes: 5,
-        comments: []
-      },
-      {
-        id: 2,
-        title: "Project Two",
-        description: "A detailed project for all tech enthusiasts.",
-        image: "https://via.placeholder.com/300",
-        likes: 10,
-        comments: []
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        // Obtener el token del usuario desde localStorage
+        const token = localStorage.getItem('token');
+        if (!token) {
+          alert('No se encontró un token de usuario.');
+          return;
+        }
+  
+        // Obtener el ID del proyecto desde la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get('id');
+        if (!projectId) {
+          alert('No se encontró el ID del proyecto en la URL.');
+          return;
+        }
+  
+        // Configuración y solicitud para obtener información del usuario
+        const userResponse = await fetch("http://localhost:3000/users/find", {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+          }
+        });
+  
+        if (!userResponse.ok) {
+          const errorData = await userResponse.json();
+          console.error("Error:", errorData);
+          alert(`Error: ${errorData.message || "No autorizado"}`);
+          return;
+        }
+  
+        const userData = await userResponse.json();
+  
+        // Solicitud para obtener información del proyecto
+        const projectResponse = await fetch(`http://localhost:3000/projectsHandler/${projectId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          }
+        });
+  
+        if (!projectResponse.ok) {
+          const errorData = await projectResponse.json();
+          console.error("Error:", errorData);
+          alert(`Error: ${errorData.error || "No se pudo obtener el proyecto"}`);
+          return;
+        }
+  
+        const projectData = await projectResponse.json();
+  
+        // Llenar los campos del proyecto
+        document.getElementById('project-title').textContent = projectData.title || 'Sin título';
+        document.getElementById('project-author').textContent = userData.name || 'Autor desconocido';
+        document.getElementById('project-category').textContent = projectData.category || 'Sin categoría';
+        document.getElementById('project-languages').textContent = projectData.languages?.join(', ') || 'No especificados';
+        document.getElementById('project-class').textContent = projectData.projectClass || 'No especificada';
+        document.getElementById('project-professor').textContent = projectData.professor || 'No especificado';
+        document.getElementById('project-likes').textContent = projectData.likes || 0;
+        document.getElementById('project-banner-img').src = projectData.banner || 'https://via.placeholder.com/150';
+  
+        // Llenar contenido del proyecto (Markdown renderizado)
+        document.getElementById('project-content').textContent = projectData.content || 'Sin contenido disponible';
+  
+        console.log('Usuario:', userData);
+        console.log('Proyecto:', projectData);
+      } catch (error) {
+        console.error('Error al cargar los datos:', error);
+        alert('Hubo un problema al cargar los datos. Revisa la consola para más detalles.');
       }
-    ];
-
-    function loadProjects() {
-      const container = $('#project-container');
-      projects.forEach(project => {
-        container.append(`
-          <div class="col-md-4 mb-4">
-            <div class="card">
-              <img src="${project.image}" class="card-img-top" alt="${project.title}">
-              <div class="card-body">
-                <h5 class="card-title">${project.title}</h5>
-                <p class="card-text">${project.description}</p>
-                <div class="d-flex align-items-center">
-                  <div class="like-icon" onclick="toggleLike(this, ${project.id})">
-                    <i class="fas fa-heart"></i>
-                  </div>
-                  <span class="ms-2">${project.likes} Likes</span>
-                </div>
-                <button class="btn btn-primary mt-3" onclick="openProject(${project.id})">Preview</button>
-              </div>
-            </div>
-          </div>
-        `);
-      });
-    }
-
-    function openProject(id) {
-      const project = projects.find(p => p.id === id);
-      $('#projectTitle').text(project.title);
-      $('#projectImage').attr('src', project.image);
-      $('#projectDescription').text(project.description);
-      $('#likeCount').text(project.likes);
-      $('#projectModal').modal('show');
-    }
-
-    function toggleLike(element, id) {
-      const project = projects.find(p => p.id === id);
-      const isLiked = $(element).hasClass('filled');
-      project.likes += isLiked ? -1 : 1;
-      $(element).toggleClass('filled');
-      $(element).siblings('span').text(`${project.likes} Likes`);
-    }
-
-    $(document).ready(() => {
-      loadProjects();
     });
-  </script>
+  </script>  
+  
 </body>
+
 </html>

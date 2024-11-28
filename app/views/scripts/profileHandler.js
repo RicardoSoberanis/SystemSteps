@@ -73,23 +73,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         userProjects.forEach(project => {
             const projectColumn = document.createElement('div');
             projectColumn.className = 'col-md-4 mb-4';
-
+        
             const projectLink = document.createElement('a');
-            projectLink.href = '#'; // You might want to link to project detail page
-            projectLink.target = '_blank';
+            projectLink.href = `projectviews.html?id=${project._id}`; // Link to the project detail page
+            projectLink.target = '_self'; // Open in the same tab
             projectLink.className = 'text-decoration-none';
-
+        
             const articleCard = document.createElement('div');
             articleCard.className = 'article-card';
-
+        
             // Project banner image (use default if empty)
             const projectImage = document.createElement('img');
             projectImage.src = project.banner || './img/grey.jpg';
             projectImage.alt = project.title;
-
+        
             const contentDiv = document.createElement('div');
             contentDiv.className = 'content';
-
+        
             const dateP = document.createElement('p');
             dateP.className = 'date';
             dateP.textContent = new Date(project.createdAt).toLocaleDateString('en-US', {
@@ -97,11 +97,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 day: 'numeric',
                 year: 'numeric'
             });
-
+        
             const titleP = document.createElement('p');
             titleP.className = 'title';
             titleP.textContent = project.title;
-
+        
             // Assemble the card
             contentDiv.appendChild(dateP);
             contentDiv.appendChild(titleP);
@@ -109,10 +109,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             articleCard.appendChild(contentDiv);
             projectLink.appendChild(articleCard);
             projectColumn.appendChild(projectLink);
-
+        
             // Add to projects container
             projectCardsContainer.appendChild(projectColumn);
         });
+        
 
         // Replace the content of the original projects container
         projectsContainer.innerHTML = projectCardsContainer.innerHTML;

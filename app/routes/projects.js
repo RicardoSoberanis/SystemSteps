@@ -7,6 +7,7 @@ const {
     getProjectsByUser,
     updateProject,
     deleteProject,
+    getProjectById
 } = require('../controllers/projects');
 const {
     getAllProjects,
@@ -66,6 +67,16 @@ router.get('/', async (req, res) => {
     }
 });
 
+// In projects route file
+router.get('/:projectId', async (req, res) => {
+  try {
+      const project = await getProjectById(req.params.projectId);
+      res.status(200).json(project);
+  } catch (error) {
+      res.status(404).json({ error: error.message });
+  }
+});
+
 router.get('/user/:userId', authenticateToken, async (req, res) => {
     try {
         const projects = await getProjectsByUser(req.params.userId);
@@ -86,13 +97,21 @@ router.post('/:projectId/like', authenticateToken, async (req, res) => {
     }
 });
 
-router.post('/:projectId/comments', authenticateToken, async (req, res) => {
-    try {
-        const project = await addComment(req.params.projectId, req.user.id, req.body.text);
-        res.json(project.comments);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+router.get('/:projectId/comments', async (req, res) => {
+  try {
+      const project = await Project.findById(req.params.projectId)
+          .populate({
+              path: 'comments.user',
+              select: 'usuario'
+          })
+          .populate({
+              path: 'comments.replies.user',
+              select: 'usuario'
+          });
+      res.json(project.comments);
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
 });
 
 router.post('/:projectId/comments/:commentId/like', authenticateToken, async (req, res) => {
