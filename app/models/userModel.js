@@ -32,6 +32,21 @@ const userSchema = mongoose.Schema({
     insignias: { 
         type: [String], 
         default: [] },
+    imageProfile: {
+        type: String,
+        default: 'https://st4.depositphotos.com/11574170/25191/v/450/depositphotos_251916955-stock-illustration-user-glyph-color-icon.jpg',
+        require: false
+    },
+    gitHubUser: {
+        type: String,
+        default: 'Agregar',
+        require: false
+    },
+    linkedInUser: {
+        type: String,
+        default: 'Agregar',
+        require: false
+    }
 });
 
 // Middleware para hashear contraseñas

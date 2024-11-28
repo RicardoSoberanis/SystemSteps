@@ -23,7 +23,7 @@ function createNewsCards(newsData) {
 
 async function fetchNews() {
     try {
-        const response = await fetch('http://localhost:3000/news'); // URL de la API
+        const response = await fetch('http://localhost:3000/news/'); // URL de la API
         const data = await response.json();
         
         if (data.success) {
