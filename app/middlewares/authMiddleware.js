@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken');
-const SECRET_KEY = process.env.SECRET_KEY; // Cambiar por una clave segura
+const SECRET_KEY = process.env.SECRET_KEY; 
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers.authorization;
+    console.log("entra")
     if (!authHeader) {
         return res.status(401).json({ message: 'No se proporcionó un token' });
     }

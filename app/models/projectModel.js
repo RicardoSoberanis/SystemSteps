@@ -32,16 +32,16 @@ const projectSchema = mongoose.Schema({
         default: 0,
     },
     comments:{
-        userId:{ type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true },
-        text: { type: String, required: true },
+        userId:{ type: mongoose.Schema.Types.ObjectId, ref: 'users', required: false },
+        text: { type: String, required: false },
         likes: { type: Number, default: 0 },
         replies: [ 
             {
-                userId: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true },
-                text: { type: String, required: true },
+                userId: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: false },
+                text: { type: String, required: false },
                 likes: { type: Number, default: 0 },
             },
-            ],
+        ],
     },
 });
 

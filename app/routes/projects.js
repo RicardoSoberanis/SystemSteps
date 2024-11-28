@@ -14,6 +14,7 @@ router.post('/', authenticateToken, async (req, res) => {
     console.log('si llega a la ruta')
     try {
         const projectData = req.body;
+        console.log(req.user)
         projectData.userId = req.user.id; // Asigna el usuario autenticado como creador
         const newProject = await addProject(projectData);
         res.status(201).json(newProject);

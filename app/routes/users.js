@@ -21,9 +21,9 @@ router.post('/', async (req, res) => {
 });
 
 // Obtener un usuario por ID
-router.get('/:userId', async (req, res) => {
+router.get('/find', authenticateToken, async (req, res) => {
     try {
-        const user = await getUser({ _id: req.params.userId });
+        const user = await getUser({ _id: req.user.id });
         res.status(200).json(user);
     } catch (error) {
         res.status(404).json({ message: 'Usuario no encontrado', error: error.message });
@@ -41,14 +41,14 @@ router.put('/:userId', async (req, res) => {
 });
 
 // Eliminar un usuario
-router.delete('/:userId', async (req, res) => {
-    try {
-        const deletedUser = await deleteUser(req.params.userId);
-        res.status(200).json(deletedUser);
-    } catch (error) {
-        res.status(500).json({ message: 'Error al eliminar usuario', error: error.message });
-    }
-});
+// router.delete('/:userId', async (req, res) => {
+//     try {
+//         const deletedUser = await deleteUser(req.params.userId);
+//         res.status(200).json(deletedUser);
+//     } catch (error) {
+//         res.status(500).json({ message: 'Error al eliminar usuario', error: error.message });
+//     }
+// });
 
 // Verificar si un email ya existe
 router.post('/check-email', async (req, res) => {
